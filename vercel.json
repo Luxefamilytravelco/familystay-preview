@@ -1,0 +1,10 @@
+{
+  "buildCommand": "echo build",
+  "outputDirectory": ".",
+  "functions": {
+    "api/concierge.js": {
+      "memory": 256,
+      "maxDuration": 30
+    }
+  }
+}
