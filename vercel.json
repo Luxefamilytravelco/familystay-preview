@@ -1,10 +1,13 @@
 {
   "buildCommand": "echo build",
   "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/", "destination": "/familystay_full.html" }
+  ],
   "functions": {
     "api/concierge.js": {
       "memory": 256,
       "maxDuration": 30
     }
   }
-} 
+}
