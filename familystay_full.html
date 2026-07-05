@@ -1050,123 +1050,6 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
 </div>
 
 <!-- CHECKOUT PAGE (Part 9) -->
-<div id="page-checkout" class="fs-page">
-  <nav style="display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100">
-    <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
-      <svg class="fs-logo" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
-    </div>
-    <div class="co-trust-item" style="color:var(--muted)"><i class="ti ti-lock" style="color:var(--gold);font-size:14px"></i> Secure checkout</div>
-  </nav>
-
-  <div class="co-wrap">
-    <!-- LEFT: order summary + plan toggle -->
-    <div class="co-left">
-      <div class="co-left-inner">
-        <div class="co-eyebrow">Your membership</div>
-        <div class="co-title">FamilyStay <em>Premium</em></div>
-
-        <div class="co-plan-toggle">
-          <div class="co-plan-opt active" id="co-opt-monthly" onclick="coSetPlan('monthly')">
-            <div class="co-radio"></div>
-            <div class="co-plan-name">Monthly</div>
-            <div><span class="co-plan-price">$4.99</span><span class="co-plan-per"> /mo</span></div>
-            <div class="co-plan-note">Billed monthly</div>
-          </div>
-          <div class="co-plan-opt" id="co-opt-yearly" onclick="coSetPlan('yearly')">
-            <div class="co-badge">Best Value</div>
-            <div class="co-radio"></div>
-            <div class="co-plan-name">Yearly</div>
-            <div><span class="co-plan-price">$39.99</span><span class="co-plan-per"> /yr</span></div>
-            <div class="co-plan-note">Save 33% · ≈$3.33/mo</div>
-          </div>
-        </div>
-
-        <div class="co-summary">
-          <div class="co-sum-row"><span id="co-sum-plan-label">Premium monthly</span><span id="co-sum-plan-price">$4.99</span></div>
-          <div class="co-sum-row"><span>3-day free trial</span><span id="co-sum-trial">−$4.99</span></div>
-          <div class="co-sum-total">
-            <div class="co-sum-total-label">Due today</div>
-            <div class="co-sum-total-val">$0.00</div>
-          </div>
-          <div class="co-renew" id="co-renew">Your 3-day free trial starts today. On <strong id="co-renew-date">—</strong> you'll be charged <strong id="co-renew-amt">$4.99/month</strong> unless you cancel. Cancel anytime from your dashboard.</div>
-        </div>
-
-        <div class="co-trust">
-          <div class="co-trust-item"><i class="ti ti-shield-check"></i> 256-bit encryption</div>
-          <div class="co-trust-item"><i class="ti ti-calendar-x"></i> Cancel anytime</div>
-          <div class="co-trust-item"><i class="ti ti-rotate"></i> No long-term contract</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: payment form -->
-    <div class="co-right">
-      <div class="co-right-inner">
-        <div id="co-form-view">
-          <button class="co-back" onclick="showPage('premium')"><i class="ti ti-arrow-left" style="font-size:13px"></i> Back to plans</button>
-          <div class="co-form-title">Payment details</div>
-          <div class="co-form-sub">You won't be charged during your 3-day free trial. We just need a card on file to keep your membership active afterwards.</div>
-
-          <div class="co-field">
-            <label class="co-label">Name on card</label>
-            <div class="co-input-wrap"><input type="text" class="co-input" id="co-name" placeholder="Jane Smith" autocomplete="cc-name"/></div>
-          </div>
-
-          <div class="co-field">
-            <label class="co-label">Card number</label>
-            <div class="co-input-wrap">
-              <input type="text" class="co-input" id="co-card" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" oninput="coFormatCard(this)"/>
-              <div class="co-input-icon"><span class="co-card-brand" id="co-brand">CARD</span></div>
-            </div>
-          </div>
-
-          <div class="co-row">
-            <div class="co-field">
-              <label class="co-label">Expiry</label>
-              <div class="co-input-wrap"><input type="text" class="co-input" id="co-exp" inputmode="numeric" placeholder="MM / YY" maxlength="7" autocomplete="cc-exp" oninput="coFormatExp(this)"/></div>
-            </div>
-            <div class="co-field">
-              <label class="co-label">CVC</label>
-              <div class="co-input-wrap"><input type="text" class="co-input" id="co-cvc" inputmode="numeric" placeholder="123" maxlength="4" autocomplete="cc-csc" oninput="this.value=this.value.replace(/\D/g,'')"/></div>
-            </div>
-          </div>
-
-          <div class="co-row">
-            <div class="co-field">
-              <label class="co-label">Country</label>
-              <div class="co-input-wrap">
-                <select class="co-input" id="co-country" style="cursor:pointer;-webkit-appearance:none">
-                  <option>United States</option><option>United Kingdom</option><option>Thailand</option><option>United Arab Emirates</option><option>Singapore</option><option>Australia</option><option>Canada</option><option>Other</option>
-                </select>
-              </div>
-            </div>
-            <div class="co-field">
-              <label class="co-label">ZIP / Postcode</label>
-              <div class="co-input-wrap"><input type="text" class="co-input" id="co-zip" placeholder="33101" autocomplete="postal-code"/></div>
-            </div>
-          </div>
-
-          <button class="co-pay-btn" id="co-pay-btn" onclick="coPay()">
-            <i class="ti ti-rocket" style="font-size:15px"></i>
-            <span id="co-pay-label">Start 3-day free trial</span>
-          </button>
-          <div class="co-secure"><i class="ti ti-lock"></i> Secured payment · You can cancel before the trial ends and pay nothing.</div>
-        </div>
-
-        <!-- SUCCESS STATE -->
-        <div id="co-success-view" style="display:none">
-          <div class="co-success">
-            <div class="co-success-icon"><i class="ti ti-check"></i></div>
-            <div class="co-form-title" style="margin-bottom:8px">You're all set!</div>
-            <div class="co-form-sub" id="co-success-msg" style="margin-bottom:24px">Your FamilyStay Premium trial is active. You won't be charged until your trial ends.</div>
-            <button class="co-pay-btn" onclick="showPage('trial-dashboard')"><i class="ti ti-layout-dashboard" style="font-size:15px"></i> Go to my dashboard</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- SAVED HOTELS PAGE -->
 <div id="page-saved-hotels" class="fs-page">
   <nav style="display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100">
@@ -2254,11 +2137,10 @@ function showPage(id){
   const page=document.getElementById('page-'+id);
   if(page){page.classList.add('active');window.scrollTo(0,0);}
   // Pages that ship their own header — hide the global nav to avoid a double header
-  const ownHeaderPages=['login','trial-signup','trial-dashboard','concierge','concierge-success','checkout','saved-hotels'];
+  const ownHeaderPages=['login','trial-signup','trial-dashboard','concierge','concierge-success','saved-hotels'];
   const gn=document.getElementById('global-nav');
   if(gn) gn.style.display=ownHeaderPages.includes(id)?'none':'flex';
   if(id==='hotels')renderHotels();
-  if(id==='checkout')renderCheckout();
   if(id==='saved-hotels')renderSavedHotelsPage();
   if(id==='trial-dashboard')refreshSavedDashboardCard();
   // Member dashboard — no trial state (membership is free)
@@ -2299,112 +2181,6 @@ function heroInit(){
 }
 heroInit();
 window.addEventListener('load', heroInit);
-
-/* ============ PART 9: TRIAL EXPIRY REMINDER ============ */
-let trialDaysLeft = 3;          // single source of truth for the trial countdown
-let txBannerDismissed = false;  // session dismiss for the banner
-let txModalShown = false;       // show the modal at most once per dashboard session
-
-function fsDatePlus(days){
-  const d=new Date(); d.setDate(d.getDate()+days);
-  return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-}
-function renderTrialState(){
-  const n=trialDaysLeft;
-  const dayWord = n===1 ? 'day' : 'days';
-  const navTxt=document.getElementById('td-nav-trial');
-  const pill=document.getElementById('td-days-left');
-  const prev=document.getElementById('tx-preview-label');
-  if(navTxt) navTxt.textContent = n<=0 ? 'Trial ended' : 'Trial · '+n+' '+dayWord+' left';
-  if(pill) pill.textContent = Math.max(n,0);
-  if(prev) prev.textContent = n<=0 ? 'trial ended' : n+' '+dayWord+' left';
-  // Banner shows when 1 day or less remains and hasn't been dismissed this session
-  const banner=document.getElementById('tx-banner');
-  const headline=document.getElementById('tx-banner-headline');
-  const show = n<=1 && !txBannerDismissed;
-  if(banner) banner.classList.toggle('show', show);
-  if(headline) headline.textContent = n<=0 ? 'Your free trial has ended.' : 'Your free trial ends tomorrow.';
-}
-function maybeShowExpiryModal(){
-  if(trialDaysLeft<=1 && !txModalShown){
-    txModalShown=true;
-    const m=document.getElementById('tx-modal');
-    if(m) m.classList.add('open');
-  }
-}
-function txCloseModal(){ const m=document.getElementById('tx-modal'); if(m) m.classList.remove('open'); }
-function txDismissModal(){ txCloseModal(); }
-function txDismissBanner(){ txBannerDismissed=true; const b=document.getElementById('tx-banner'); if(b) b.classList.remove('show'); }
-// Prototype helper: cycle 3 → 1 → 0 → 3 so the reminder can be previewed without a backend
-function txCycleDays(){
-  trialDaysLeft = trialDaysLeft===3 ? 1 : (trialDaysLeft===1 ? 0 : 3);
-  txBannerDismissed=false; txModalShown=false;
-  renderTrialState();
-  maybeShowExpiryModal();
-}
-
-/* ============ PART 9: CHECKOUT ============ */
-let coPlan='monthly';
-const CO_PLANS={
-  monthly:{label:'Premium monthly', price:'$4.99', recur:'$4.99/month'},
-  yearly: {label:'Premium yearly',  price:'$39.99', recur:'$39.99/year'}
-};
-function goCheckout(plan){ if(plan) coPlan=plan; coResetForm(); showPage('checkout'); }
-function coResetForm(){
-  const fv=document.getElementById('co-form-view'); const sv=document.getElementById('co-success-view');
-  if(fv) fv.style.display='block'; if(sv) sv.style.display='none';
-}
-function coSetPlan(plan){ coPlan=plan; renderCheckout(); }
-function renderCheckout(){
-  const p=CO_PLANS[coPlan];
-  document.getElementById('co-opt-monthly').classList.toggle('active', coPlan==='monthly');
-  document.getElementById('co-opt-yearly').classList.toggle('active', coPlan==='yearly');
-  const set=(id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
-  set('co-sum-plan-label', p.label);
-  set('co-sum-plan-price', p.price);
-  set('co-sum-trial', '−'+p.price);
-  set('co-renew-date', fsDatePlus(3));
-  set('co-renew-amt', p.recur);
-  const lbl=document.getElementById('co-pay-label'); if(lbl) lbl.textContent='Start 3-day free trial';
-}
-function coDetectBrand(num){
-  if(/^4/.test(num)) return 'VISA';
-  if(/^5[1-5]/.test(num)||/^2[2-7]/.test(num)) return 'MC';
-  if(/^3[47]/.test(num)) return 'AMEX';
-  if(/^6/.test(num)) return 'DISC';
-  return 'CARD';
-}
-function coFormatCard(el){
-  let v=el.value.replace(/\D/g,'').slice(0,16);
-  el.value=v.replace(/(.{4})/g,'$1 ').trim();
-  const b=document.getElementById('co-brand');
-  if(b){ const brand=coDetectBrand(v); b.textContent=brand; b.classList.toggle('on', brand!=='CARD' && v.length>=2); }
-}
-function coFormatExp(el){
-  let v=el.value.replace(/\D/g,'').slice(0,4);
-  if(v.length>=3) v=v.slice(0,2)+' / '+v.slice(2);
-  el.value=v;
-}
-function coPay(){
-  const btn=document.getElementById('co-pay-btn');
-  const lbl=document.getElementById('co-pay-label');
-  // lightweight validation
-  const card=(document.getElementById('co-card').value||'').replace(/\s/g,'');
-  const name=(document.getElementById('co-name').value||'').trim();
-  if(name.length<2){ alert('Please enter the name on your card.'); return; }
-  if(card.length<15){ alert('Please enter a valid card number.'); return; }
-  btn.disabled=true;
-  if(lbl) lbl.innerHTML='<span class="co-spin"></span> Processing…';
-  setTimeout(()=>{
-    const p=CO_PLANS[coPlan];
-    const msg=document.getElementById('co-success-msg');
-    if(msg) msg.textContent='Your FamilyStay Premium '+(coPlan==='yearly'?'annual':'monthly')+' trial is active. You won\u2019t be charged until '+fsDatePlus(3)+', then '+p.recur+'. Cancel anytime.';
-    document.getElementById('co-form-view').style.display='none';
-    document.getElementById('co-success-view').style.display='block';
-    btn.disabled=false; if(lbl) lbl.textContent='Start 3-day free trial';
-    window.scrollTo(0,0);
-  },1100);
-}
 
 renderHotels();</script>
 
@@ -2698,7 +2474,7 @@ renderHotels();</script>
       <button style="width:100%;padding:13px;background:var(--navy);color:var(--cream);border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px" onmouseover="this.style.background='var(--navy-mid)'" onmouseout="this.style.background='var(--navy)'" onclick="showPage('trial-dashboard')">Sign in</button>
 
       <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--muted);font-weight:300">
-        Don't have an account? <a onclick="showPage('trial-signup')" style="color:var(--gold);cursor:pointer;font-weight:700;text-decoration:none">Start free trial</a>
+        Don't have an account? <a onclick="showPage('trial-signup')" style="color:var(--gold);cursor:pointer;font-weight:700;text-decoration:none">Join free</a>
       </div>
 
       <div style="text-align:center;margin-top:12px">
