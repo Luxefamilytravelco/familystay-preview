@@ -309,7 +309,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 4
 .hotels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 
 /* HOTEL CARDS */
-.hotel-card{background:var(--white);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;overflow:hidden}
+.hotel-card{background:var(--white);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.hcard-save-btn{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(26,39,68,0.55);backdrop-filter:blur(4px);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:15px;z-index:2;transition:all 0.15s}
+.hcard-save-btn:hover{background:rgba(26,39,68,0.8);transform:scale(1.08)}
+.hcard-save-btn.saved{color:#E05C7B;background:rgba(255,255,255,0.9)}
+.hp-save-btn.saved{background:rgba(224,92,123,0.1);border-color:#E05C7B;color:#E05C7B}
 .hotel-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,39,68,0.1)}
 .hotel-icon{height:48px;background:#1a2744;display:block}
 .hotel-icon-inner,.hotel-icon-mark,.hotel-icon-sub{display:none}
@@ -324,32 +328,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 4
 .meta-row i{color:var(--gold);font-size:11px;flex-shrink:0}
 .hotel-cta{font-size:11px;color:var(--gold);display:flex;align-items:center;gap:4px;margin-top:6px;font-family:'Nunito',sans-serif;font-weight:700}
 
-/* BOOKING POPUP */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
-.overlay.open{display:flex}
-.popup{background:var(--navy);border:1px solid rgba(201,153,58,0.3);border-radius:16px;max-width:420px;width:100%;padding:32px;animation:popIn 0.2s ease}
-@keyframes popIn{from{transform:scale(0.97);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes spin{to{transform:rotate(360deg)}}
-.popup-logo{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:16px;color:var(--cream);margin-bottom:16px}
-.popup-logo span{color:var(--gold)}
-.popup-hotel{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;color:var(--cream);margin-bottom:4px}
-.popup-loc{font-size:11px;color:var(--muted);letter-spacing:0.5px;margin-bottom:8px;display:flex;align-items:center;gap:4px}
-.popup-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px}
-.popup-badge{font-size:10px;padding:3px 10px;border-radius:20px;font-family:'Nunito',sans-serif;font-weight:700}
-.popup-kc{border:1px solid var(--border-gold);color:var(--gold)}
-.popup-hours{border:1px solid rgba(255,255,255,0.15);color:rgba(238,240,248,0.6)}
-.popup-ages{border:1px solid rgba(255,255,255,0.15);color:rgba(238,240,248,0.6)}
-.popup-title{font-size:10px;font-family:'Nunito',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.booking-options{display:flex;flex-direction:column;gap:8px}
-.booking-btn{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;text-decoration:none;width:100%}
-.booking-btn:hover{border-color:var(--gold);background:rgba(201,153,58,0.08)}
-.booking-left{display:flex;align-items:center;gap:10px}
-.booking-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:#fff}
-.booking-name{font-size:13px;font-weight:500;color:var(--cream);text-align:left;font-family:'DM Sans',sans-serif}
-.booking-desc{font-size:10px;color:var(--muted);margin-top:1px;text-align:left;font-weight:300}
-.booking-arrow{color:var(--gold);font-size:14px;flex-shrink:0}
-.popup-close{width:100%;margin-top:12px;padding:10px;border:1px solid rgba(255,255,255,0.12);border-radius:8px;background:transparent;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s}
-.popup-close:hover{border-color:rgba(255,255,255,0.3);color:var(--cream)}
 
 /* PREMIUM PAGE */
 .premium-page{max-width:500px;margin:0 auto;padding:60px 24px}
@@ -764,27 +743,6 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
 </head>
 <body>
 
-<!-- BOOKING POPUP -->
-<div class="overlay" id="booking-overlay">
-  <div class="popup">
-    <div class="popup-logo"><svg class="fs-logo-sm" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#F4F6FB">Family<tspan fill="#DDB055">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#DDB055" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg></div>
-    <div class="popup-hotel" id="popup-hotel-name"></div>
-    <div class="popup-loc"><i class="ti ti-map-pin" style="font-size:10px"></i><span id="popup-hotel-loc"></span></div>
-    <div class="popup-meta">
-      <span class="popup-badge popup-kc" id="popup-kc-name"></span>
-      <span class="popup-badge popup-hours" id="popup-hours"></span>
-      <span class="popup-badge popup-ages" id="popup-ages"></span>
-    </div>
-    <div class="popup-title">Select your preferred booking platform</div>
-    <div class="booking-options">
-      <a class="booking-btn" id="book-expedia" href="#" target="_blank" rel="noopener sponsored"><div class="booking-left"><div class="booking-icon" style="background:#FFD700;color:#1a1a1a">EX</div><div><div class="booking-name">Expedia</div><div class="booking-desc">Bundle hotel + flights & save</div></div></div><i class="ti ti-chevron-right booking-arrow"></i></a>
-      <a class="booking-btn" id="book-vrbo" href="#" target="_blank" rel="noopener sponsored"><div class="booking-left"><div class="booking-icon" style="background:#1668E3">V</div><div><div class="booking-name">Vrbo</div><div class="booking-desc">Whole vacation homes for families</div></div></div><i class="ti ti-chevron-right booking-arrow"></i></a>
-      <a class="booking-btn" id="book-hotels" href="#" target="_blank" rel="noopener sponsored"><div class="booking-left"><div class="booking-icon" style="background:#D32F2F">H.</div><div><div class="booking-name">Hotels.com</div><div class="booking-desc">Earn free nights with rewards</div></div></div><i class="ti ti-chevron-right booking-arrow"></i></a>
-    </div>
-    <button class="popup-close" onclick="closePopup()">✕ Close</button>
-  </div>
-</div>
-
 <nav id="global-nav">
   <div class="nav-logo" onclick="showPage('home')">
     <svg class="fs-logo" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
@@ -822,7 +780,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
     <div class="hero-inner">
       <div class="hero-eyebrow">Bring the kids. Actually take a break.</div>
       <h1>The hotels families<br>deserve to <em>discover.</em></h1>
-      <p class="hero-sub">320 curated properties — every one verified for kids clubs, babysitting &amp; family suites. No guesswork.</p>
+      <p class="hero-sub">320 hotels hand-picked for real family amenities — kids clubs, babysitting &amp; family suites. No guesswork.</p>
       <div class="hero-fun-chips">
         <span class="fun-chip"><i class="ti ti-swim"></i> Kids pools</span>
         <span class="fun-chip"><i class="ti ti-building-community"></i> Kids clubs</span>
@@ -907,7 +865,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
       </div>
       <div class="trust-item">
         <div class="trust-num">100<span>%</span></div>
-        <div class="trust-label">Kids club verified</div>
+        <div class="trust-label">Family-focused only</div>
       </div>
     </div>
 
@@ -921,7 +879,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
         <div class="why-card">
           <div class="why-icon"><i class="ti ti-phone-call"></i></div>
           <div class="why-title">We call. They confirm.</div>
-          <div class="why-body">Every hotel on this site has been contacted directly. Kids club hours, ages, babysitting — verified by us, not copy-pasted from a page last updated in 2019.</div>
+          <div class="why-body">We research every hotel for real family amenities — kids club hours, ages, babysitting — and we're calling properties directly to confirm the details that matter most, not just relying on a page last updated in 2019.</div>
         </div>
         <div class="why-card">
           <div class="why-icon"><i class="ti ti-users"></i></div>
@@ -953,10 +911,10 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
         </div>
       </div>
       <div style="max-width:340px">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;font-style:italic;color:var(--cream);line-height:1.5;margin-bottom:16px">"Finally — a site that tells me what I actually need to know before booking a family holiday."</div>
-        <div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)">— Early member, FamilyStay Collection</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;font-style:italic;color:var(--cream);line-height:1.5;margin-bottom:16px">"We built this because we couldn't find a site that told us what we actually needed to know before booking a family holiday."</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)">— Founder, FamilyStay Collection</div>
         <button onclick="showPage('trial-signup')" style="margin-top:20px;background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:12px 22px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px">
-          <i class="ti ti-users"></i> Join families planning smarter
+          <i class="ti ti-users"></i> Plan smarter, together
         </button>
       </div>
     </div>
@@ -1005,7 +963,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
   <footer>
     <svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
     <div class="footer-links"><a onclick="showPage('about')" style="color:var(--sage);text-decoration:none;cursor:pointer">About</a><a onclick="showPage('privacy')" style="color:var(--sage);text-decoration:none;cursor:pointer">Privacy</a><a onclick="showPage('terms')" style="color:var(--sage);text-decoration:none;cursor:pointer">Terms</a><a style="color:var(--sage);text-decoration:none">Contact</a><a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:5px"><i class="ti ti-brand-instagram" style="font-size:14px"></i>@familystaycollection</a></div>
-    <div class="footer-note">© 2025 FamilyStay Collection™ · Luxury family travel, curated.</div>
+    <div class="footer-note">© 2026 FamilyStay Collection™ · Luxury family travel, curated.</div>
   </footer>
 </div>
 
@@ -1063,7 +1021,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
     <div style="border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:12px;background:var(--white)">
       <div style="font-size:10px;font-family:'Nunito',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Free</div>
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-        <div style="font-size:13px;display:flex;align-items:center;gap:8px;color:var(--navy)"><i class="ti ti-check" style="color:var(--gold)"></i>Browse all 319+ verified hotels</div>
+        <div style="font-size:13px;display:flex;align-items:center;gap:8px;color:var(--navy)"><i class="ti ti-check" style="color:var(--gold)"></i>Browse all 319+ family-vetted hotels</div>
         <div style="font-size:13px;display:flex;align-items:center;gap:8px;color:var(--navy)"><i class="ti ti-check" style="color:var(--gold)"></i>View kids club hours & age ranges</div>
         <div style="font-size:13px;display:flex;align-items:center;gap:8px;color:var(--navy)"><i class="ti ti-check" style="color:var(--gold)"></i>Compare prices on Expedia, Vrbo & Hotels.com</div>
         <div style="font-size:13px;display:flex;align-items:center;gap:8px;color:var(--muted)"><i class="ti ti-x" style="color:var(--muted)"></i>Saved searches & price alerts</div>
@@ -1199,7 +1157,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
         <div id="co-success-view" style="display:none">
           <div class="co-success">
             <div class="co-success-icon"><i class="ti ti-check"></i></div>
-            <div class="co-form-title" style="margin-bottom:8px">You're all set! 🎉</div>
+            <div class="co-form-title" style="margin-bottom:8px">You're all set!</div>
             <div class="co-form-sub" id="co-success-msg" style="margin-bottom:24px">Your FamilyStay Premium trial is active. You won't be charged until your trial ends.</div>
             <button class="co-pay-btn" onclick="showPage('trial-dashboard')"><i class="ti ti-layout-dashboard" style="font-size:15px"></i> Go to my dashboard</button>
           </div>
@@ -1207,6 +1165,28 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
       </div>
     </div>
   </div>
+</div>
+
+<!-- SAVED HOTELS PAGE -->
+<div id="page-saved-hotels" class="fs-page">
+  <nav style="display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100">
+    <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+      <svg class="fs-logo" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
+    </div>
+    <button class="nav-btn" onclick="showPage('trial-dashboard')"><i class="ti ti-arrow-left" style="font-size:13px"></i> Back to dashboard</button>
+  </nav>
+  <div class="section" style="padding-top:40px;max-width:1200px;margin:0 auto;width:100%">
+    <div class="section-header" style="margin-bottom:24px">
+      <div class="section-eyebrow">Your shortlist</div>
+      <div class="section-title" style="font-size:34px">Saved hotels</div>
+      <div style="font-size:13px;color:var(--muted);font-weight:300;margin-top:6px" id="saved-hotels-count">0 saved hotels</div>
+    </div>
+    <div id="saved-hotels-container"></div>
+  </div>
+  <footer style="margin-top:40px">
+    <svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
+    <div class="footer-note">© 2026 FamilyStay Collection™ · Luxury family travel, curated.</div>
+  </footer>
 </div>
 
 <!-- HOTEL PROFILE PAGE -->
@@ -1232,7 +1212,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
   </div>
   <footer style="padding:20px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#A0AACC;flex-wrap:wrap;gap:10px">
     <svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
-    <div>© 2025 FamilyStay Collection™ · Luxury family travel, curated.</div>
+    <div>© 2026 FamilyStay Collection™ · Luxury family travel, curated.</div>
   </footer>
 </div>
 
@@ -1497,50 +1477,6 @@ function heroSearch(){
 }
 
 // ============ DEST STYLES & FLAGS ============
-const destStyles={
-  "United Arab Emirates":{bg:"rgba(184,150,46,0.06)",e:"🏙️"},
-  "Thailand":{bg:"rgba(184,150,46,0.06)",e:"🌴"},
-  "Turkey":{bg:"rgba(184,150,46,0.06)",e:"🕌"},
-  "Indonesia":{bg:"rgba(184,150,46,0.06)",e:"🌺"},
-  "Maldives":{bg:"rgba(184,150,46,0.06)",e:"🐠"},
-  "Qatar":{bg:"rgba(184,150,46,0.06)",e:"🌆"},
-  "Malaysia":{bg:"rgba(184,150,46,0.06)",e:"🌿"},
-  "Singapore":{bg:"rgba(184,150,46,0.06)",e:"🦁"},
-  "India":{bg:"rgba(184,150,46,0.06)",e:"🏛️"},
-  "China":{bg:"rgba(184,150,46,0.06)",e:"🏮"},
-  "Bahrain":{bg:"rgba(184,150,46,0.06)",e:"⚓"},
-  "Kuwait":{bg:"rgba(184,150,46,0.06)",e:"🌊"},
-  "Oman":{bg:"rgba(184,150,46,0.06)",e:"🏔️"},
-  "Hong Kong":{bg:"rgba(184,150,46,0.06)",e:"🌃"},
-  "Vietnam":{bg:"rgba(184,150,46,0.06)",e:"⛵"},
-  "Japan":{bg:"rgba(184,150,46,0.06)",e:"⛩️"},
-  "Philippines":{bg:"rgba(184,150,46,0.06)",e:"🏝️"},
-  "Caribbean & Mexico":{bg:"rgba(184,150,46,0.06)",e:"🌊"},
-  "Mexico":{bg:"rgba(184,150,46,0.06)",e:"🏖️"},
-  "Dominican Republic":{bg:"rgba(184,150,46,0.06)",e:"☀️"},
-  "Jamaica":{bg:"rgba(184,150,46,0.06)",e:"🎵"},
-  "Costa Rica":{bg:"rgba(184,150,46,0.06)",e:"🌿"},
-  "Saint Lucia":{bg:"rgba(184,150,46,0.06)",e:"🌊"},
-  "America":{bg:"rgba(184,150,46,0.06)",e:"🗽"},
-  "South Africa":{bg:"rgba(184,150,46,0.06)",e:"🦁"},
-  "Mauritius":{bg:"rgba(184,150,46,0.06)",e:"🏝️"},
-  "Seychelles":{bg:"rgba(184,150,46,0.06)",e:"🌴"},
-  "Kenya":{bg:"rgba(184,150,46,0.06)",e:"🦒"},
-  "Morocco":{bg:"rgba(184,150,46,0.06)",e:"🕌"},
-  "Egypt":{bg:"rgba(184,150,46,0.06)",e:"🏺"},
-  "Tanzania":{bg:"rgba(184,150,46,0.06)",e:"🌍"},
-  "Namibia":{bg:"rgba(184,150,46,0.06)",e:"🌅"},
-  "Greece":{bg:"rgba(184,150,46,0.06)",e:"🏛️"},
-  "Italy":{bg:"rgba(184,150,46,0.06)",e:"🏖️"},
-  "Spain":{bg:"rgba(184,150,46,0.06)",e:"☀️"},
-  "Portugal":{bg:"rgba(184,150,46,0.06)",e:"⚓"},
-  "Cyprus":{bg:"rgba(184,150,46,0.06)",e:"🌊"},
-  "France":{bg:"rgba(184,150,46,0.06)",e:"🗼"},
-  "Austria":{bg:"rgba(184,150,46,0.06)",e:"🏔️"},
-  "Switzerland":{bg:"rgba(184,150,46,0.06)",e:"🏔️"},
-  "Croatia":{bg:"rgba(184,150,46,0.06)",e:"⛵"},
-  "default":{bg:"rgba(184,150,46,0.06)",e:"🌍"}
-};
 
 const flags={"United Arab Emirates":"🇦🇪","Thailand":"🇹🇭","Turkey":"🇹🇷","Indonesia":"🇮🇩","Maldives":"🇲🇻","Qatar":"🇶🇦","Malaysia":"🇲🇾","Singapore":"🇸🇬","India":"🇮🇳","China":"🇨🇳","Bahrain":"🇧🇭","Kuwait":"🇰🇼","Oman":"🇴🇲","Hong Kong":"🇭🇰","Vietnam":"🇻🇳","Japan":"🇯🇵","Philippines":"🇵🇭","Mexico":"🇲🇽","Dominican Republic":"🇩🇴","Jamaica":"🇯🇲","Costa Rica":"🇨🇷","Saint Lucia":"🇱🇨","Caribbean & Mexico":"🌴","America":"🇺🇸","South Africa":"🇿🇦","Mauritius":"🇲🇺","Seychelles":"🇸🇨","Kenya":"🇰🇪","Morocco":"🇲🇦","Egypt":"🇪🇬","Tanzania":"🇹🇿","Namibia":"🇳🇦","Greece":"🇬🇷","Italy":"🇮🇹","Spain":"🇪🇸","Portugal":"🇵🇹","Cyprus":"🇨🇾","France":"🇫🇷","Austria":"🇦🇹","Switzerland":"🇨🇭","Croatia":"🇭🇷"};
 
@@ -1880,7 +1816,6 @@ function toggleAmenity(btn){
 function openProfile(name,city,country,kc,hours,ages,allInc,state){
   const locLabel=state?`${city}, ${state}`:`${city}, ${country}`;
   const am=getAmenities(name);
-  const s=destStyles[country]||destStyles['default'];
   const q=name; // hotel name only → tightest match on Expedia/Hotels.com search
   const flag=flags[country]||'🌍';
 
@@ -1903,7 +1838,7 @@ function openProfile(name,city,country,kc,hours,ages,allInc,state){
   if(am.babysit&&am.babysit.startsWith('Yes')) badgeList.push('<i class="ti ti-moon"></i> Babysitting');
   if(am.beach&&am.beach.startsWith('Yes')) badgeList.push('<i class="ti ti-beach"></i> Private beach');
   if(am.wp&&am.wp.startsWith('Yes')) badgeList.push('<i class="ti ti-wave-sine"></i> Waterpark');
-  if(am.teens&&am.teens.startsWith('Yes')) badgeList.push('🎮 Teens club');
+  if(am.teens&&am.teens.startsWith('Yes')) badgeList.push('<i class="ti ti-device-gamepad-2"></i> Teens club');
   if(am.famsuite&&am.famsuite.startsWith('Yes')) badgeList.push('<i class="ti ti-bed"></i> Family suites');
   if(allInc==='Yes') badgeList.push('<i class="ti ti-glass"></i> All-inclusive');
 
@@ -1920,7 +1855,7 @@ function openProfile(name,city,country,kc,hours,ages,allInc,state){
       <div class="hp-right">
         <div class="hp-score"><div class="hp-score-num">${score}</div><div class="hp-score-lbl">Family Score™</div></div>
         <button class="hp-book-btn" onclick="hpTab(document.querySelectorAll('.hp-tab')[0],'overview');document.getElementById('hp-booking-block').scrollIntoView({behavior:'smooth'})">Check prices</button>
-        <button class="hp-save-btn"><i class="ti ti-heart" style="font-size:13px"></i> Save</button>
+        <button class="hp-save-btn${isHotelSaved(name)?' saved':''}" id="hp-save-btn" data-hotel="${name.replace(/"/g,'&quot;')}" onclick="toggleSaveHotel('${name.replace(/'/g,"\\'")}')"><i class="ti ${isHotelSaved(name)?'ti-heart-filled':'ti-heart'}" style="font-size:13px"></i> ${isHotelSaved(name)?'Saved':'Save'}</button>
       </div>
     </div>`;
 
@@ -2010,12 +1945,12 @@ function buildKCTab(kc,hours,ages){
 function buildAmenitiesTab(am,allInc){
   const items=[
     {e:'<i class="ti ti-wave-sine"></i>',n:'Waterpark',v:am.wp,def:'Not on-site'},
-    {e:'🏞️',n:'Lazy river',v:am.lazy,def:'Not available'},
-    {e:'💦',n:'Kids splash zone',v:am.splash,def:'Standard pools'},
+    {e:'<i class="ti ti-droplet"></i>',n:'Lazy river',v:am.lazy,def:'Not available'},
+    {e:'<i class="ti ti-droplets"></i>',n:'Kids splash zone',v:am.splash,def:'Standard pools'},
     {e:'<i class="ti ti-moon"></i>',n:'Babysitting',v:am.babysit,def:'Not confirmed'},
     {e:'<i class="ti ti-bed"></i>',n:'Family suites',v:am.famsuite,def:'Standard rooms'},
     {e:'<i class="ti ti-swim"></i>',n:'Kids pool',v:am.kidspool,def:'Shared pool'},
-    {e:'🎮',n:'Teens club',v:am.teens,def:'Not available'},
+    {e:'<i class="ti ti-device-gamepad-2"></i>',n:'Teens club',v:am.teens,def:'Not available'},
     {e:'<i class="ti ti-beach"></i>',n:'Private beach',v:am.beach,def:'No private beach'},
   ];
   return`<div class="hp-block">
@@ -2090,7 +2025,7 @@ function renderBookingOptions(q){
         <i class="ti ti-calendar-check" style="color:var(--gold);font-size:14px"></i>
         <span><strong style="font-family:'Nunito',sans-serif">${dateLabel}</strong> · ${guestLabel} — passed to each platform</span>
        </div>`
-    :`<div style="font-size:11px;color:#A0AACC;margin-bottom:12px;font-family:'DM Sans',sans-serif">💡 Select dates on the home page to pass them to each booking site</div>`;
+    :`<div style="font-size:11px;color:#A0AACC;margin-bottom:12px;font-family:'DM Sans',sans-serif"><i class="ti ti-bulb"></i> Select dates on the home page to pass them to each booking site</div>`;
 
   const sites=[
     {label:'EX',bg:'#FFD700',fg:'#1a1a1a',name:'Expedia',desc:'Bundle hotel + flights · dates & guests passed',url:urls.expedia},
@@ -2098,7 +2033,7 @@ function renderBookingOptions(q){
     {label:'H.',bg:'#D32F2F',name:'Hotels.com',desc:'Earn free nights · dates & guests passed',url:urls.hotels},
   ];
 
-  const disclosure=`<div style="font-size:11px;color:#A0AACC;line-height:1.6;margin-top:14px;font-family:'DM Sans',sans-serif">FamilyStay Collection™ earns a commission when you book through these links, at no extra cost to you. This helps keep the site free.</div>`;
+  const disclosure=`<div style="font-size:11px;color:#A0AACC;line-height:1.6;margin-top:14px;font-family:'DM Sans',sans-serif">FamilyStay Collection™ is building affiliate partnerships with these platforms. Once live, we may earn a commission when you book, at no extra cost to you. This helps keep the site free.</div>`;
 
   return dateNote+`<div class="hp-booking-opts">${sites.map(s=>`
     <a class="hp-book-row" href="${s.url}" target="_blank" rel="noopener sponsored">
@@ -2118,12 +2053,7 @@ function openBooking(name,city,country,kc,hours,ages){
   openProfile(name,city,country,kc,hours,ages,'');
 }
 
-function closePopup(){
-  document.getElementById('booking-overlay').classList.remove('open');
-  document.body.style.overflow='';
-}
 
-document.getElementById('booking-overlay').addEventListener('click',function(e){if(e.target===this)closePopup();});
 
 function setCountry(btn){
   document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
@@ -2150,6 +2080,95 @@ function filterAndShow(country){
 const CARIBBEAN=['Mexico','Dominican Republic','Jamaica','Costa Rica','Saint Lucia'];
 function getDisplayCountry(c){return CARIBBEAN.includes(c)?'Caribbean & Mexico':c;}
 
+/* ============ SAVED HOTELS ============ */
+function getSavedHotelNames(){
+  try{ return JSON.parse(localStorage.getItem('fs_saved_hotels')||'[]'); }catch(e){ return []; }
+}
+function setSavedHotelNames(arr){
+  try{ localStorage.setItem('fs_saved_hotels', JSON.stringify(arr)); }catch(e){}
+}
+function isHotelSaved(name){
+  return getSavedHotelNames().includes(name);
+}
+function toggleSaveHotel(name, event){
+  if(event){ event.stopPropagation(); }
+  let saved=getSavedHotelNames();
+  const nowSaved=!saved.includes(name);
+  saved = nowSaved ? [...saved, name] : saved.filter(n=>n!==name);
+  setSavedHotelNames(saved);
+
+  // Update any matching grid card heart(s) without a full re-render
+  document.querySelectorAll('.hcard-save-btn[data-hotel="'+CSS.escape(name)+'"]').forEach(btn=>{
+    btn.classList.toggle('saved', nowSaved);
+    btn.innerHTML=`<i class="ti ${nowSaved?'ti-heart-filled':'ti-heart'}"></i>`;
+  });
+
+  // Update the hotel profile Save button if it's currently showing this hotel
+  const hpBtn=document.getElementById('hp-save-btn');
+  if(hpBtn && hpBtn.dataset.hotel===name){
+    hpBtn.classList.toggle('saved', nowSaved);
+    hpBtn.innerHTML=`<i class="ti ${nowSaved?'ti-heart-filled':'ti-heart'}" style="font-size:13px"></i> ${nowSaved?'Saved':'Save'}`;
+  }
+
+  refreshSavedDashboardCard();
+  if(document.getElementById('page-saved-hotels')?.classList.contains('active')) renderSavedHotelsPage();
+}
+
+function refreshSavedDashboardCard(){
+  const el=document.getElementById('td-saved-card-body');
+  const badge=document.getElementById('td-saved-card-badge');
+  if(!el) return;
+  const names=getSavedHotelNames();
+  const hotels=names.map(n=>H.find(h=>h.n===n)).filter(Boolean);
+  if(badge) badge.textContent = hotels.length ? hotels.length+' saved' : 'No saves yet';
+  if(!hotels.length){
+    el.innerHTML=`<div class="td-empty">
+      <div class="td-empty-icon"><i class="ti ti-building-skyscraper"></i></div>
+      <div class="td-empty-text">Save hotels as you browse — build your shortlist for the next family holiday.</div>
+      <button class="td-empty-btn" onclick="showPage('hotels')">Browse hotels →</button>
+    </div>`;
+    return;
+  }
+  const preview=hotels.slice(0,3);
+  el.innerHTML=`<div style="display:flex;flex-direction:column;gap:8px">
+    ${preview.map(h=>`<div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg);border-radius:8px">
+      <div style="flex:1;min-width:0"><div style="font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${h.n}</div><div style="font-size:11px;color:var(--muted);font-weight:300">${h.city}, ${h.c}</div></div>
+    </div>`).join('')}
+    <button class="td-empty-btn" style="margin-top:4px" onclick="showPage('saved-hotels')">View all saved hotels →</button>
+  </div>`;
+}
+
+function renderSavedHotelsPage(){
+  const container=document.getElementById('saved-hotels-container');
+  const countEl=document.getElementById('saved-hotels-count');
+  if(!container) return;
+  const names=getSavedHotelNames();
+  const hotels=names.map(n=>H.find(h=>h.n===n)).filter(Boolean);
+  if(countEl) countEl.textContent = hotels.length+' saved hotel'+(hotels.length!==1?'s':'');
+  if(!hotels.length){
+    container.innerHTML=`<div style="text-align:center;padding:80px 20px;color:var(--muted)">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;color:var(--navy);margin-bottom:8px">No saved hotels yet</div>
+      <div style="font-size:13px;font-weight:300;margin-bottom:20px">Tap the heart on any hotel to build your shortlist.</div>
+      <button class="premium-btn" style="margin:0 auto" onclick="showPage('hotels')">Browse all hotels</button>
+    </div>`;
+    return;
+  }
+  container.innerHTML=`<div class="hotels-grid">${hotels.map(h=>`
+    <div class="hotel-card" onclick="openProfile('${h.n.replace(/'/g,"\\'")}','${h.city}','${h.c}','${(h.kc||'').replace(/'/g,"\\'")}','${(h.h||'').replace(/'/g,"\\'")}','${(h.a||'').replace(/'/g,"\\'")}','${h.ai||''}','${h.st||''}')">
+      <button class="hcard-save-btn saved" data-hotel="${h.n.replace(/"/g,'&quot;')}" onclick="toggleSaveHotel('${h.n.replace(/'/g,"\\'")}',event)"><i class="ti ti-heart-filled"></i></button>
+      <div class="hotel-icon"><div class="hotel-icon-inner"><div class="hotel-icon-mark">FS</div><div class="hotel-icon-sub">Collection</div></div></div>
+      <div class="hotel-body">
+        <div class="hotel-name">${h.n}</div>
+        <div class="hotel-city"><i class="ti ti-map-pin" style="font-size:10px"></i>${h.city}${h.st ? ', ' + h.st : ', ' + h.c}</div>
+        <div class="hotel-badges">
+          <span class="kc-badge"><i class="ti ti-check" style="font-size:9px"></i>Kids club</span>
+          ${h.kc?`<span class="kc-name">${h.kc}</span>`:''}
+        </div>
+        <div class="hotel-cta"><i class="ti ti-arrow-right" style="font-size:10px"></i>See prices →</div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
 function renderHotels(){
   const q=(document.getElementById('search-input')?.value||'').toLowerCase().trim();
   let filtered=H.filter(h=>{
@@ -2168,18 +2187,16 @@ function renderHotels(){
   const container=document.getElementById('hotels-container');
   if(!container)return;
   if(filtered.length===0){container.innerHTML='<div style="text-align:center;padding:80px 20px;color:var(--muted)"><div style="font-family:Cormorant Garamond,serif;font-size:24px;font-style:italic;color:var(--navy);margin-bottom:8px">No hotels found</div><div style="font-size:11px;font-family:Nunito,sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase">Try a different search</div></div>';return;}
-  const getS=c=>destStyles[c]||destStyles['default'];
   const am_icons=h=>{
     const am=getAmenities(h.n);
     const icons=[];
     if(am.wp&&am.wp.startsWith('Yes')) icons.push('<span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid rgba(201,153,58,0.3);border-radius:20px;padding:2px 7px;color:#C9993A;font-family:Nunito,sans-serif;font-weight:700"><i class="ti ti-wave-sine"></i> Waterpark</span>');
     if(am.beach&&am.beach.startsWith('Yes')) icons.push('<span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid rgba(201,153,58,0.3);border-radius:20px;padding:2px 7px;color:#C9993A;font-family:Nunito,sans-serif;font-weight:700"><i class="ti ti-beach"></i> Beach</span>');
-    if(am.teens&&am.teens.startsWith('Yes')) icons.push('<span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid rgba(201,153,58,0.3);border-radius:20px;padding:2px 7px;color:#C9993A;font-family:Nunito,sans-serif;font-weight:700">🎮 Teens</span>');
+    if(am.teens&&am.teens.startsWith('Yes')) icons.push('<span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid rgba(201,153,58,0.3);border-radius:20px;padding:2px 7px;color:#C9993A;font-family:Nunito,sans-serif;font-weight:700"><i class="ti ti-device-gamepad-2"></i> Teens</span>');
     if(h.ai==='Yes') icons.push('<span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid rgba(201,153,58,0.3);border-radius:20px;padding:2px 7px;color:#C9993A;font-family:Nunito,sans-serif;font-weight:700"><i class="ti ti-glass"></i> All-incl</span>');
     return icons.slice(0,2).join('');
   };
   container.innerHTML=sortedEntries.map(([country,hs])=>{
-    const s=getS(country);
     return`<div class="country-section">
       <div class="country-header">
         <div class="country-icon">FS</div>
@@ -2189,6 +2206,7 @@ function renderHotels(){
       <div class="hotels-grid">
         ${hs.map(h=>`
           <div class="hotel-card" onclick="openProfile('${h.n.replace(/'/g,"\\'")}','${h.city}','${h.c}','${(h.kc||'').replace(/'/g,"\\'")}','${(h.h||'').replace(/'/g,"\\'")}','${(h.a||'').replace(/'/g,"\\'")}','${h.ai||''}','${h.st||''}')">
+            <button class="hcard-save-btn${isHotelSaved(h.n)?' saved':''}" data-hotel="${h.n.replace(/"/g,'&quot;')}" onclick="toggleSaveHotel('${h.n.replace(/'/g,"\\'")}',event)"><i class="ti ${isHotelSaved(h.n)?'ti-heart-filled':'ti-heart'}"></i></button>
             <div class="hotel-icon"><div class="hotel-icon-inner"><div class="hotel-icon-mark">FS</div><div class="hotel-icon-sub">Collection</div></div></div>
             <div class="hotel-body">
               <div class="hotel-name">${h.n}</div>
@@ -2236,11 +2254,13 @@ function showPage(id){
   const page=document.getElementById('page-'+id);
   if(page){page.classList.add('active');window.scrollTo(0,0);}
   // Pages that ship their own header — hide the global nav to avoid a double header
-  const ownHeaderPages=['login','trial-signup','trial-dashboard','concierge','concierge-success','checkout'];
+  const ownHeaderPages=['login','trial-signup','trial-dashboard','concierge','concierge-success','checkout','saved-hotels'];
   const gn=document.getElementById('global-nav');
   if(gn) gn.style.display=ownHeaderPages.includes(id)?'none':'flex';
   if(id==='hotels')renderHotels();
   if(id==='checkout')renderCheckout();
+  if(id==='saved-hotels')renderSavedHotelsPage();
+  if(id==='trial-dashboard')refreshSavedDashboardCard();
   // Member dashboard — no trial state (membership is free)
 }
 
@@ -2455,13 +2475,16 @@ renderHotels();</script>
     <!-- OUR PROMISE -->
     <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Our promise</div>
     <h2 style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;color:var(--navy);line-height:1.2;margin-bottom:20px">
-      No commissions that change what we recommend. No paywalls. No fluff.
+      We built this because we were the ones with 14 tabs open at midnight.
     </h2>
     <p style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;color:#3a3a4a;line-height:1.9;margin-bottom:24px;max-width:680px">
-      We earn a small affiliate commission when you book through Expedia, Vrbo or Hotels.com — at exactly the same price you would pay anywhere else. That commission never influences which hotels make the collection. A hotel is in because it is genuinely good for families, full stop.
+      Every hotel here earned its place by actually being good for families — real kids clubs, real babysitting, real waterparks, not a checkbox on a filter. If it wouldn't work for our own kids, it's not on the list.
+    </p>
+    <p style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;color:#3a3a4a;line-height:1.9;margin-bottom:24px;max-width:680px">
+      One honesty note: FamilyStay Collection is built as an affiliate business. Once our partnerships with platforms like Expedia, Vrbo and Hotels.com go live, booking through our links may earn us a small commission — at the exact same price you'd pay booking direct. It will never decide what makes the cut. The commission follows the hotel; it doesn't choose it.
     </p>
     <p style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;color:#3a3a4a;line-height:1.9;margin-bottom:48px;max-width:680px">
-      We are parents first. This is the site we wish existed when we started travelling with our kids. We hope it gives your family the holiday you deserve — and gives you back the hours you would have spent researching it.
+      This is the site we wished existed the first time we tried to plan a family trip and gave up halfway through a spreadsheet. We hope it gets your family to the good part faster.
     </p>
 
     <!-- TAGLINE CLOSER -->
@@ -2485,7 +2508,7 @@ renderHotels();</script>
   </div>
   <footer style="padding:24px 40px;border-top:1px solid var(--border);background:var(--bg);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
     <div class="footer-logo">Family<span>Stay</span> <span style="font-family:'Nunito',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold)">COLLECTION</span></div>
-    <div style="font-size:11px;color:var(--muted);font-family:'Nunito',sans-serif">© 2025 FamilyStay Collection™ · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
+    <div style="font-size:11px;color:var(--muted);font-family:'Nunito',sans-serif">© 2026 FamilyStay Collection™ · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
   </footer>
 </div>
 
@@ -2520,7 +2543,7 @@ renderHotels();</script>
 
       <div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px">4. Affiliate links</h2>
-        <p>FamilyStay Collection™ participates in affiliate programmes with Expedia, Vrbo and Hotels.com. When you click a booking link and complete a purchase, we may earn a small commission at no additional cost to you. This does not influence which hotels are featured in our collection.</p>
+        <p>FamilyStay Collection™ is built as an affiliate business. We are in the process of establishing affiliate partnerships with platforms including Expedia, Vrbo and Hotels.com. Once live, booking through our links may earn us a small commission at no additional cost to you. This does not and will not influence which hotels are featured in our collection.</p>
       </div>
 
       <div>
@@ -2557,7 +2580,7 @@ renderHotels();</script>
   </div>
   <footer style="padding:24px 40px;border-top:1px solid var(--border);background:var(--bg);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
     <div class="footer-logo">Family<span>Stay</span> <span style="font-family:'Nunito',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold)">COLLECTION</span></div>
-    <div style="font-size:11px;color:var(--muted);font-family:'Nunito',sans-serif">© 2025 FamilyStay Collection™ · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
+    <div style="font-size:11px;color:var(--muted);font-family:'Nunito',sans-serif">© 2026 FamilyStay Collection™ · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
   </footer>
 </div>
 
@@ -2590,7 +2613,7 @@ renderHotels();</script>
 
       <div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px">4. Affiliate relationships</h2>
-        <p>FamilyStay Collection™ participates in affiliate programmes. We may earn a commission when you book through links on our site. This is at no additional cost to you and does not influence our editorial decisions. Hotels are selected solely on the basis of suitability for families.</p>
+        <p>FamilyStay Collection™ is built as an affiliate business and is in the process of establishing affiliate partnerships. Once live, we may earn a commission when you book through links on our site, at no additional cost to you. This does not and will not influence our editorial decisions. Hotels are selected solely on the basis of suitability for families.</p>
       </div>
 
       <div>
@@ -2637,7 +2660,7 @@ renderHotels();</script>
   </div>
   <footer style="padding:24px 40px;border-top:1px solid var(--border);background:var(--bg);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
     <div class="footer-logo">Family<span>Stay</span> <span style="font-family:'Nunito',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold)">COLLECTION</span></div>
-    <div style="font-size:11px;color:var(--muted);font-family:'Nunito',sans-serif">© 2025 FamilyStay Collection™ · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
+    <div style="font-size:11px;color:var(--muted);font-family:'Nunito',sans-serif">© 2026 FamilyStay Collection™ · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
   </footer>
 </div>
 <div id="page-login" class="fs-page">
@@ -2702,19 +2725,19 @@ renderHotels();</script>
         <div class="tl-sub">Free forever. No credit card. Browsing and booking are always free — membership just adds perks.</div>
         <div class="tl-perks">
           <div class="tl-perk">
-            <div class="tl-perk-icon">🗺️</div>
+            <div class="tl-perk-icon"><i class="ti ti-map"></i></div>
             <div><div class="tl-perk-title">Concierge trip planning</div><div class="tl-perk-desc">Tell us your family's needs — we handpick 3–5 perfect hotels within 24 hours.</div></div>
           </div>
           <div class="tl-perk">
-            <div class="tl-perk-icon">❤️</div>
+            <div class="tl-perk-icon"><i class="ti ti-heart"></i></div>
             <div><div class="tl-perk-title">Saved searches & trip boards</div><div class="tl-perk-desc">Build and organise wishlists for upcoming family holidays.</div></div>
           </div>
           <div class="tl-perk">
-            <div class="tl-perk-icon">🔔</div>
+            <div class="tl-perk-icon"><i class="ti ti-bell"></i></div>
             <div><div class="tl-perk-title">Price drop alerts</div><div class="tl-perk-desc">Watch hotels and get notified when prices fall. Never pay more than you should.</div></div>
           </div>
           <div class="tl-perk">
-            <div class="tl-perk-icon">🎟️</div>
+            <div class="tl-perk-icon"><i class="ti ti-ticket"></i></div>
             <div><div class="tl-perk-title">Exclusive member deals</div><div class="tl-perk-desc">Hotel offers and packages shared with FamilyStay members first.</div></div>
           </div>
         </div>
@@ -2730,7 +2753,7 @@ renderHotels();</script>
       <div class="trial-right-inner">
         <button class="tr-back" onclick="showPage('premium')"><i class="ti ti-arrow-left" style="font-size:13px"></i> Back</button>
         <div class="tr-title">Create your free account</div>
-        <div class="tr-sub">Join thousands of families planning smarter holidays. Free forever — no credit card.</div>
+        <div class="tr-sub">Free forever — no credit card, no catch.</div>
 
         <button class="tr-google" onclick="showPage('trial-dashboard')">
           <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -2803,7 +2826,7 @@ renderHotels();</script>
         <div class="td-welcome-sub">You're all set — saved hotels, trip boards, deal alerts and concierge planning, all free. Start exploring below.</div>
       </div>
       <div class="td-trial-pill">
-        <div class="td-days-left" id="td-days-left" style="font-size:20px">★</div>
+        <div class="td-days-left" id="td-days-left" style="font-size:20px"><i class="ti ti-star-filled"></i></div>
         <div class="td-days-label">Free<br>member</div>
       </div>
     </div>
@@ -2811,19 +2834,19 @@ renderHotels();</script>
     <!-- QUICK ACTIONS -->
     <div class="td-quick-links">
       <div class="td-quick" onclick="showPage('hotels')">
-        <div class="td-quick-icon">🔍</div>
+        <div class="td-quick-icon"><i class="ti ti-search"></i></div>
         <div class="td-quick-label">Browse hotels</div>
       </div>
       <div class="td-quick" onclick="showPage('concierge')">
-        <div class="td-quick-icon">🧳</div>
+        <div class="td-quick-icon"><i class="ti ti-briefcase"></i></div>
         <div class="td-quick-label">Concierge planning</div>
       </div>
-      <div class="td-quick">
-        <div class="td-quick-icon">❤️</div>
+      <div class="td-quick" onclick="showPage('saved-hotels')">
+        <div class="td-quick-icon"><i class="ti ti-heart"></i></div>
         <div class="td-quick-label">Saved hotels</div>
       </div>
       <div class="td-quick">
-        <div class="td-quick-icon">🔔</div>
+        <div class="td-quick-icon"><i class="ti ti-bell"></i></div>
         <div class="td-quick-label">Price alerts</div>
       </div>
     </div>
@@ -2831,7 +2854,7 @@ renderHotels();</script>
     <!-- CONCIERGE CTA -->
     <div class="td-concierge-card">
       <div class="td-concierge-inner">
-        <div class="td-concierge-icon">🧳</div>
+        <div class="td-concierge-icon"><i class="ti ti-briefcase"></i></div>
         <div style="flex:1">
           <div class="td-concierge-title">Try concierge trip planning — free for members</div>
           <div class="td-concierge-desc">Tell us about your family, destinations and dates. Our team will handpick 3–5 perfectly matched hotels with kids clubs and email them to you within 24 hours.</div>
@@ -2850,12 +2873,14 @@ renderHotels();</script>
       <div class="td-card">
         <div class="td-card-head">
           <div class="td-card-title"><i class="ti ti-heart"></i> Saved hotels</div>
-          <div class="td-card-badge new">New feature</div>
+          <div class="td-card-badge" id="td-saved-card-badge">No saves yet</div>
         </div>
-        <div class="td-empty">
-          <div class="td-empty-icon">🏨</div>
-          <div class="td-empty-text">Save hotels as you browse — build your shortlist for the next family holiday.</div>
-          <button class="td-empty-btn" onclick="showPage('hotels')">Browse hotels →</button>
+        <div id="td-saved-card-body">
+          <div class="td-empty">
+            <div class="td-empty-icon"><i class="ti ti-building-skyscraper"></i></div>
+            <div class="td-empty-text">Save hotels as you browse — build your shortlist for the next family holiday.</div>
+            <button class="td-empty-btn" onclick="showPage('hotels')">Browse hotels →</button>
+          </div>
         </div>
       </div>
 
@@ -2866,7 +2891,7 @@ renderHotels();</script>
           <div class="td-card-badge new">New feature</div>
         </div>
         <div class="td-empty">
-          <div class="td-empty-icon">📉</div>
+          <div class="td-empty-icon"><i class="ti ti-trending-down"></i></div>
           <div class="td-empty-text">Watch a hotel and we'll alert you when prices drop — great for planning ahead.</div>
           <button class="td-empty-btn" onclick="showPage('hotels')">Find a hotel to watch →</button>
         </div>
@@ -2879,7 +2904,7 @@ renderHotels();</script>
           <div class="td-card-badge">0 boards</div>
         </div>
         <div class="td-empty">
-          <div class="td-empty-icon">🗺️</div>
+          <div class="td-empty-icon"><i class="ti ti-map"></i></div>
           <div class="td-empty-text">Create boards to organise hotels by trip — "Asia 2025", "Summer Caribbean" and so on.</div>
           <button class="td-empty-btn" style="background:transparent;border:1.5px dashed rgba(26,39,68,0.2);color:#A0AACC;font-size:11px;padding:8px 16px">+ Create first board</button>
         </div>
@@ -2889,24 +2914,12 @@ renderHotels();</script>
       <div class="td-card">
         <div class="td-card-head">
           <div class="td-card-title"><i class="ti ti-tag"></i> Exclusive deals</div>
-          <div class="td-card-badge new">3 available</div>
+          <div class="td-card-badge">Coming soon</div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:8px">
-            <div style="font-size:20px">🌴</div>
-            <div style="flex:1"><div style="font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--navy)">Bali resort — 15% off</div><div style="font-size:11px;color:var(--muted);font-weight:300">Shared with members first · Expires Jul 31</div></div>
-            <div style="font-size:10px;color:var(--gold);font-family:'Nunito',sans-serif;font-weight:700">View →</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:8px">
-            <div style="font-size:20px">🐠</div>
-            <div style="flex:1"><div style="font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--navy)">Maldives — free kids stay</div><div style="font-size:11px;color:var(--muted);font-weight:300">Kids under 12 stay free · 3 nights min</div></div>
-            <div style="font-size:10px;color:var(--gold);font-family:'Nunito',sans-serif;font-weight:700">View →</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:8px">
-            <div style="font-size:20px">🕌</div>
-            <div style="flex:1"><div style="font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--navy)">Dubai — kids club free upgrade</div><div style="font-size:11px;color:var(--muted);font-weight:300">Extended hours included · Book by Aug 1</div></div>
-            <div style="font-size:10px;color:var(--gold);font-family:'Nunito',sans-serif;font-weight:700">View →</div>
-          </div>
+        <div class="td-empty">
+          <div class="td-empty-icon"><i class="ti ti-tag"></i></div>
+          <div class="td-empty-text">We're building relationships with hotels to bring members exclusive offers first. Nothing live yet — check back soon.</div>
+          <button class="td-empty-btn" onclick="showPage('hotels')">Browse hotels →</button>
         </div>
       </div>
 
@@ -2939,14 +2952,14 @@ renderHotels();</script>
   </nav>
   <div class="concierge-hero">
     <div class="c-hero-inner">
-      <div class="c-hero-icon-wrap">🧳</div>
+      <div class="c-hero-icon-wrap"><i class="ti ti-briefcase" style="color:var(--gold);font-size:36px"></i></div>
       <div class="c-hero-text">
         <div class="c-hero-eyebrow">Member feature</div>
         <div class="c-hero-title">Concierge <em>trip planning</em></div>
         <div class="c-hero-sub">Tell us about your family and we'll handpick the perfect hotels — with kids clubs, the right ages, your budget, and your vibe. Personally curated within 24 hours.</div>
         <div class="c-hero-badges">
-          <span class="c-hero-badge">⏱️ Response within 24hrs</span>
-          <span class="c-hero-badge">✅ Free for members</span>
+          <span class="c-hero-badge"><i class="ti ti-clock"></i> Response within 24hrs</span>
+          <span class="c-hero-badge"><i class="ti ti-circle-check"></i> Free for members</span>
           <span class="c-hero-badge"><i class="ti ti-users"></i> Personalised for your family</span>
         </div>
       </div>
@@ -2996,21 +3009,21 @@ renderHotels();</script>
         </div>
         <!-- STEP 2 -->
         <div class="c-form-section" id="c-section-2">
-          <div class="c-form-section-header"><div class="c-section-icon">✈️</div><div><div class="c-section-title">Trip details</div><div class="c-section-sub">Where are you going and when?</div></div></div>
+          <div class="c-form-section-header"><div class="c-section-icon"><i class="ti ti-plane-departure"></i></div><div><div class="c-section-title">Trip details</div><div class="c-section-sub">Where are you going and when?</div></div></div>
           <div class="c-form-group">
             <label class="c-form-label">Destinations of interest <span>*</span></label>
             <div class="c-pill-group" id="c-dest-pills">
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">🌴 Bali</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-map-pin"></i> Bali</div>
               <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-beach"></i> Cancun / Mexico</div>
               <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">Maldives</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">🕌 Dubai / UAE</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-map-pin"></i> Dubai / UAE</div>
               <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-wave-sine"></i> Thailand</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">🏝️ Caribbean</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">☀️ Mediterranean</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">🦒 East Africa</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">🗽 USA</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">🇯🇵 Japan</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()">🌏 Open to suggestions</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-map-pin"></i> Caribbean</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-map-pin"></i> Mediterranean</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-map-pin"></i> East Africa</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-map-pin"></i> USA</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-map-pin"></i> Japan</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected');cUpdateSummary()"><i class="ti ti-world"></i> Open to suggestions</div>
             </div>
             <div class="c-form-hint" style="margin-top:10px">Select all that interest you — we'll narrow it down</div>
           </div>
@@ -3021,8 +3034,8 @@ renderHotels();</script>
           <div class="c-form-group">
             <label class="c-form-label">How flexible are your dates?</label>
             <div class="c-option-grid-2">
-              <div class="c-option-card" onclick="cSelectSingle(this,'flex','fixed')"><div class="c-option-icon">📅</div><div class="c-option-label">Fixed dates</div><div class="c-option-desc">Flights already booked or school-locked</div></div>
-              <div class="c-option-card selected" onclick="cSelectSingle(this,'flex','flexible')"><div class="c-option-icon">🔄</div><div class="c-option-label">Flexible ±3 days</div><div class="c-option-desc">Can shift slightly for better deals</div></div>
+              <div class="c-option-card" onclick="cSelectSingle(this,'flex','fixed')"><div class="c-option-icon"><i class="ti ti-calendar"></i></div><div class="c-option-label">Fixed dates</div><div class="c-option-desc">Flights already booked or school-locked</div></div>
+              <div class="c-option-card selected" onclick="cSelectSingle(this,'flex','flexible')"><div class="c-option-icon"><i class="ti ti-refresh"></i></div><div class="c-option-label">Flexible ±3 days</div><div class="c-option-desc">Can shift slightly for better deals</div></div>
             </div>
           </div>
           <div class="c-form-group">
@@ -3036,15 +3049,15 @@ renderHotels();</script>
         </div>
         <!-- STEP 3 -->
         <div class="c-form-section" id="c-section-3">
-          <div class="c-form-section-header"><div class="c-section-icon">⭐</div><div><div class="c-section-title">What matters most to your family?</div><div class="c-section-sub">Help us find exactly the right match</div></div></div>
+          <div class="c-form-section-header"><div class="c-section-icon"><i class="ti ti-star"></i></div><div><div class="c-section-title">What matters most to your family?</div><div class="c-section-sub">Help us find exactly the right match</div></div></div>
           <div class="c-form-group">
             <label class="c-form-label">Hotel vibe <span>*</span></label>
             <div class="c-option-grid">
-              <div class="c-option-card" onclick="cSelectSingle(this,'vibe','luxury')"><div class="c-option-icon">✨</div><div class="c-option-label">Luxury</div><div class="c-option-desc">5-star, butler service, no compromises</div></div>
+              <div class="c-option-card" onclick="cSelectSingle(this,'vibe','luxury')"><div class="c-option-icon"><i class="ti ti-sparkles"></i></div><div class="c-option-label">Luxury</div><div class="c-option-desc">5-star, butler service, no compromises</div></div>
               <div class="c-option-card selected" onclick="cSelectSingle(this,'vibe','resort')"><div class="c-option-icon"><i class="ti ti-swim"></i></div><div class="c-option-label">Family resort</div><div class="c-option-desc">Waterparks, activities, kids eat free</div></div>
-              <div class="c-option-card" onclick="cSelectSingle(this,'vibe','boutique')"><div class="c-option-icon">🌿</div><div class="c-option-label">Boutique</div><div class="c-option-desc">Intimate, unique, off the beaten track</div></div>
+              <div class="c-option-card" onclick="cSelectSingle(this,'vibe','boutique')"><div class="c-option-icon"><i class="ti ti-leaf"></i></div><div class="c-option-label">Boutique</div><div class="c-option-desc">Intimate, unique, off the beaten track</div></div>
               <div class="c-option-card" onclick="cSelectSingle(this,'vibe','allinclusive')"><div class="c-option-icon"><i class="ti ti-glass"></i></div><div class="c-option-label">All-inclusive</div><div class="c-option-desc">Stress-free, everything included</div></div>
-              <div class="c-option-card" onclick="cSelectSingle(this,'vibe','adventure')"><div class="c-option-icon">🧗</div><div class="c-option-label">Adventure</div><div class="c-option-desc">Safari, hiking, active experiences</div></div>
+              <div class="c-option-card" onclick="cSelectSingle(this,'vibe','adventure')"><div class="c-option-icon"><i class="ti ti-mountain"></i></div><div class="c-option-label">Adventure</div><div class="c-option-desc">Safari, hiking, active experiences</div></div>
               <div class="c-option-card" onclick="cSelectSingle(this,'vibe','beach')"><div class="c-option-icon"><i class="ti ti-beach"></i></div><div class="c-option-label">Beach & relax</div><div class="c-option-desc">Sun, sand, zero agenda</div></div>
             </div>
           </div>
@@ -3063,10 +3076,10 @@ renderHotels();</script>
           <div class="c-form-group">
             <label class="c-form-label">Is this for a special occasion?</label>
             <div class="c-pill-group">
-              <div class="c-pill" onclick="this.classList.toggle('selected')">🎂 Birthday</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected')">💍 Anniversary</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected')">🎓 Graduation</div>
-              <div class="c-pill" onclick="this.classList.toggle('selected')">👴 Multi-gen family trip</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected')"><i class="ti ti-cake"></i> Birthday</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected')"><i class="ti ti-diamond"></i> Anniversary</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected')"><i class="ti ti-school"></i> Graduation</div>
+              <div class="c-pill" onclick="this.classList.toggle('selected')"><i class="ti ti-users-group"></i> Multi-gen family trip</div>
               <div class="c-pill" onclick="this.classList.toggle('selected')"><i class="ti ti-beach"></i> Annual family holiday</div>
               <div class="c-pill" onclick="this.classList.toggle('selected')">No special occasion</div>
             </div>
@@ -3076,7 +3089,7 @@ renderHotels();</script>
         </div>
         <!-- STEP 4 -->
         <div class="c-form-section" id="c-section-4">
-          <div class="c-form-section-header"><div class="c-section-icon">📋</div><div><div class="c-section-title">Review your request</div><div class="c-section-sub">Check everything looks right before we start curating</div></div></div>
+          <div class="c-form-section-header"><div class="c-section-icon"><i class="ti ti-clipboard-list"></i></div><div><div class="c-section-title">Review your request</div><div class="c-section-sub">Check everything looks right before we start curating</div></div></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
             <div style="background:var(--bg);border-radius:10px;padding:16px"><div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">Your family</div><div style="font-size:13px;color:var(--navy);font-weight:500;margin-bottom:4px" id="c-rev-name">—</div><div style="font-size:12px;color:var(--muted);font-weight:300" id="c-rev-kids">—</div></div>
             <div style="background:var(--bg);border-radius:10px;padding:16px"><div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">Trip</div><div style="font-size:13px;color:var(--navy);font-weight:500;margin-bottom:4px" id="c-rev-dates">—</div><div style="font-size:12px;color:var(--muted);font-weight:300" id="c-rev-budget">—</div></div>
@@ -3092,7 +3105,7 @@ renderHotels();</script>
 
         <!-- STEP 5 — AI RESULTS -->
         <div class="c-form-section" id="c-section-5">
-          <div class="c-form-section-header"><div class="c-section-icon">✨</div><div><div class="c-section-title">Your curated recommendations</div><div class="c-section-sub" id="c-ai-sub">Handpicked for your family by FamilyStay Concierge</div></div></div>
+          <div class="c-form-section-header"><div class="c-section-icon"><i class="ti ti-sparkles"></i></div><div><div class="c-section-title">Your curated recommendations</div><div class="c-section-sub" id="c-ai-sub">Handpicked for your family by FamilyStay Concierge</div></div></div>
           <div id="c-ai-loading" style="display:none;text-align:center;padding:48px 20px">
             <div style="width:56px;height:56px;border:3px solid rgba(201,153,58,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 20px"></div>
             <div style="font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px" id="c-loading-msg">Reviewing your family profile...</div>
@@ -3100,7 +3113,7 @@ renderHotels();</script>
           </div>
           <div id="c-ai-results" style="display:none"></div>
           <div id="c-ai-error" style="display:none;background:rgba(220,50,50,0.06);border:1px solid rgba(220,50,50,0.2);border-radius:10px;padding:20px;text-align:center">
-            <div style="font-size:24px;margin-bottom:10px">😔</div>
+            <div style="font-size:24px;margin-bottom:10px"><i class="ti ti-mood-sad" style="font-size:22px;color:var(--gold)"></i></div>
             <div style="font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px">Concierge is warming up</div>
             <div style="font-size:12px;color:var(--muted);font-weight:300;margin-bottom:16px">Our AI concierge isn't quite live yet — but your request has been saved and we'll be in touch within 24 hours.</div>
             <button class="c-btn-next" onclick="showPage('home')">Browse hotels instead</button>
@@ -3133,7 +3146,7 @@ renderHotels();</script>
       </div>
     </div>
   </div>
-  <footer style="padding:20px 40px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:#A0AACC"><svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg> · © 2025 · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:#C9993A;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><i class="ti ti-brand-instagram" style="font-size:12px"></i>@familystaycollection</a></footer>
+  <footer style="padding:20px 40px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:#A0AACC"><svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg> · © 2026 · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:#C9993A;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><i class="ti ti-brand-instagram" style="font-size:12px"></i>@familystaycollection</a></footer>
 </div>
 
 <!-- CONCIERGE SUCCESS -->
@@ -3141,7 +3154,7 @@ renderHotels();</script>
   <nav><div class="nav-logo" onclick="showPage('home')" style="cursor:pointer"><svg class="fs-logo" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg></div></nav>
   <div class="c-success-wrap">
     <div class="c-success-card">
-      <div class="c-success-icon">🎉</div>
+      <div class="c-success-icon"><i class="ti ti-circle-check" style="color:var(--gold);font-size:36px"></i></div>
       <div class="c-success-title">Request sent!</div>
       <div class="c-success-sub">Your concierge request is with our team. We'll handpick the perfect family hotels and email you personalised recommendations shortly.</div>
       <div class="c-success-ref">Reference: <span>FSC-2025-<span id="c-ref-num">4821</span></span></div>
@@ -3153,7 +3166,7 @@ renderHotels();</script>
       <button class="c-success-btn" onclick="showPage('hotels')"><i class="ti ti-arrow-left" style="font-size:14px;margin-right:6px"></i>Back to hotels</button>
     </div>
   </div>
-  <footer style="padding:20px 40px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:#A0AACC"><svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg> · © 2025 · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:#C9993A;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><i class="ti ti-brand-instagram" style="font-size:12px"></i>@familystaycollection</a></footer>
+  <footer style="padding:20px 40px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:#A0AACC"><svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg> · © 2026 · <a href="https://instagram.com/familystaycollection" target="_blank" style="color:#C9993A;text-decoration:none;display:inline-flex;align-items:center;gap:4px"><i class="ti ti-brand-instagram" style="font-size:12px"></i>@familystaycollection</a></footer>
 </div>
 
 <script>
@@ -3291,7 +3304,7 @@ function buildHotelContext(data){
     return score;
   }
 
-  const sorted=[...H].sort((a,b)=>scoreHotel(b)-scoreHotel(a)).slice(0,80);
+  const sorted=[...H].sort((a,b)=>scoreHotel(b)-scoreHotel(a)).slice(0,40);
   return sorted.map(h=>{
     const a=AMENITIES[h.n]||{};
     return `${h.n} (${h.city}, ${h.c}) — Kids club: ${h.kc||'No'} ${h.h?'('+h.h+')':''} ${h.a?'ages '+h.a:''} | Waterpark: ${a.wp||'No'} | Babysitting: ${a.babysit||'Unknown'} | Family suite: ${a.famsuite||'Unknown'} | Beach: ${a.beach||'No'} | Lazy river: ${a.lazy||'No'} | Teens: ${a.teens||'No'} | Notes: ${a.notes||''}`;
@@ -3343,8 +3356,8 @@ For each recommended hotel, provide:
 Format each hotel as:
 **[NUMBER]. [HOTEL NAME]** — [City, Country]
 [Why it's right for this family - 2-3 sentences]
-⭐ Standout: [key feature]
-📍 [One specific tip or caveat]
+Standout: [key feature]
+Tip: [One specific tip or caveat]
 
 End with a warm 1-sentence closing. Do not include booking links or pricing — just the curation.`;
 
@@ -3381,7 +3394,7 @@ function renderAIResults(text, name){
   // Parse the markdown-ish response into styled cards
   const lines=text.split('\n');
   let html=`<div style="margin-bottom:20px;padding:16px;background:rgba(201,153,58,0.07);border-radius:10px;border-left:3px solid var(--gold)">
-    <div style="font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">✨ Your personal curation</div>
+    <div style="font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px"><i class="ti ti-sparkles"></i> Your personal curation</div>
     <div style="font-size:13px;color:var(--navy);font-weight:300;line-height:1.6">Hi ${name||'there'} — here are your handpicked recommendations from our curated collection of 320 family hotels.</div>
   </div>`;
 
@@ -3403,17 +3416,17 @@ function renderAIResults(text, name){
           <div style="width:36px;height:36px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Nunito',sans-serif;font-weight:800;color:var(--gold);font-size:14px">${hotelMatch[1]}</div>
           <div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--navy);line-height:1.2">${hotelMatch[2]}</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:300;margin-top:2px">📍 ${hotelMatch[3]}</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:300;margin-top:2px"><i class="ti ti-map-pin"></i> ${hotelMatch[3]}</div>
           </div>
         </div>`;
       return;
     }
 
     if(inCard){
-      if(trimmed.startsWith('⭐')){
-        html+=`<div style="background:rgba(201,153,58,0.08);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:12px;color:var(--navy);font-weight:500">${trimmed}</div>`;
-      } else if(trimmed.startsWith('📍')){
-        html+=`<div style="font-size:12px;color:var(--muted);font-weight:300;margin-top:8px;font-style:italic">${trimmed}</div></div>`;
+      if(trimmed.startsWith('Standout:')){
+        html+=`<div style="background:rgba(201,153,58,0.08);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:12px;color:var(--navy);font-weight:500"><i class="ti ti-star" style="color:var(--gold)"></i> ${trimmed}</div>`;
+      } else if(trimmed.startsWith('Tip:')){
+        html+=`<div style="font-size:12px;color:var(--muted);font-weight:300;margin-top:8px;font-style:italic"><i class="ti ti-map-pin"></i> ${trimmed}</div></div>`;
         inCard=false;
       } else {
         html+=`<div style="font-size:13px;color:var(--navy);font-weight:300;line-height:1.7;margin-bottom:6px">${trimmed}</div>`;
