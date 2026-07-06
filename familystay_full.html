@@ -856,7 +856,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
     <!-- TRUST NUMBERS -->
     <div class="trust-grid">
       <div class="trust-item">
-        <div class="trust-num">3<span>20</span></div>
+        <div class="trust-num">320</div>
         <div class="trust-label">Curated hotels</div>
       </div>
       <div class="trust-item">
@@ -898,7 +898,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
     <div style="background:linear-gradient(135deg,var(--navy) 0%,#243360 100%);border-radius:20px;padding:40px 48px;margin-bottom:48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap" class="social-proof-strip">
       <div style="display:flex;gap:48px;flex-wrap:wrap">
         <div style="text-align:center">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:#fff;line-height:1;letter-spacing:-1px">320<span style="color:var(--gold)">+</span></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:#fff;line-height:1;letter-spacing:-1px">320</div>
           <div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px">Hotels curated</div>
         </div>
         <div style="text-align:center">
@@ -906,7 +906,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
           <div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px">Countries</div>
         </div>
         <div style="text-align:center">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:#fff;line-height:1;letter-spacing:-1px">0<span style="color:var(--gold)">$</span></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:#fff;line-height:1;letter-spacing:-1px"><span style="color:var(--gold)">$</span>0</div>
           <div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px">To browse & book</div>
         </div>
       </div>
@@ -972,6 +972,10 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
   <div class="filter-bar">
     <input id="search-input" type="text" placeholder="Search hotels, cities, clubs..." oninput="renderHotels()"/>
     <button class="filter-chip amenity-chip" id="chip-waterpark" data-amenity="waterpark" onclick="toggleAmenity(this)" style="background:rgba(201,153,58,0.08);border-color:rgba(201,153,58,0.4);color:#C9993A"><i class="ti ti-wave-sine"></i> Waterpark</button>
+    <button class="filter-chip amenity-chip" id="chip-allinc" data-amenity="allinc" onclick="toggleAmenity(this)" style="background:rgba(201,153,58,0.08);border-color:rgba(201,153,58,0.4);color:#C9993A"><i class="ti ti-tag"></i> All-inclusive</button>
+    <button class="filter-chip amenity-chip" id="chip-lazyriver" data-amenity="lazyriver" onclick="toggleAmenity(this)" style="background:rgba(201,153,58,0.08);border-color:rgba(201,153,58,0.4);color:#C9993A"><i class="ti ti-droplet"></i> Lazy river</button>
+    <button class="filter-chip amenity-chip" id="chip-teensclub" data-amenity="teensclub" onclick="toggleAmenity(this)" style="background:rgba(201,153,58,0.08);border-color:rgba(201,153,58,0.4);color:#C9993A"><i class="ti ti-device-gamepad-2"></i> Teens club</button>
+    <button class="filter-chip amenity-chip" id="chip-privatebeach" data-amenity="privatebeach" onclick="toggleAmenity(this)" style="background:rgba(201,153,58,0.08);border-color:rgba(201,153,58,0.4);color:#C9993A"><i class="ti ti-beach"></i> Private beach</button>
     <div style="width:1px;height:20px;background:var(--border);margin:0 2px;align-self:center;flex-shrink:0"></div>
     <button class="filter-chip active" data-country="All" onclick="setCountry(this)">All</button>
     <button class="filter-chip" data-country="America" onclick="setCountry(this)">USA</button>
@@ -1102,48 +1106,321 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
 <script>
 // ============ AMENITY DATA (from master spreadsheet) ============
 const AMENITIES = {
-  "Address Beach Resort":{wp:"No",lazy:"No",splash:"Yes – outdoor splash pad",babysit:"Yes",famsuite:"Yes – interconnecting rooms",kidspool:"Yes – family pool",teens:"No",beach:"Yes – JBR beach",notes:"World's highest infinity pool; kids club 9am–9pm ages 4–11"},
-  "Anantara The Palm Dubai Resort":{wp:"No",lazy:"No",splash:"Yes – lagoon splash areas",babysit:"Yes – babysitting available on request",famsuite:"Yes – lagoon villas",kidspool:"Yes – 3 lagoon pools",teens:"Yes – Chill Teens Club",beach:"Yes – private",notes:"Thai-inspired overwater villas; lagoon pools"},
-  "Burj Al Arab":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – all duplex suites",kidspool:"Yes",teens:"No",beach:"Yes – private",notes:"Kids club floor 18; Wild Wadi Waterpark nearby"},
-  "Waldorf Astoria Ras Al Khaimah":{wp:"No",lazy:"No",splash:"Yes – splash pad",babysit:"Yes",famsuite:"Yes – family rooms & suites",kidspool:"Yes – Pearl Kids pool",teens:"Yes – Drift Teens",beach:"Yes – private",notes:"Cinema for children; heated family lagoon pool"},
-  "Atlantis The Palm":{wp:"Yes – Aquaventure World (105 slides)",lazy:"Yes",splash:"Yes – Splashers Island",babysit:"Yes – from 7 months",famsuite:"Yes – 1400+ interconnecting rooms",kidspool:"Yes",teens:"Yes – The Zone (13–17)",beach:"Yes – private",notes:"Aquarium: Lost Chambers; complimentary waterpark & aquarium per night"},
-  "Nickelodeon Hotels & Resorts Riviera Maya":{wp:"Yes – Aqua Nick (6 acres)",lazy:"Yes – lazy river",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – Hangout",beach:"Yes",notes:"Character meet & greets; Nickelodeon slime experiences"},
-  "Nickelodeon Hotels & Resorts Punta Cana":{wp:"Yes – Aqua Nick",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"Yes",beach:"Yes",notes:"Character meet & greets; Aqua Nick waterpark"},
-  "Royalton Splash Riviera Cancun":{wp:"Yes – 14 slides, Caribbean's largest",lazy:"Yes – 2 lazy rivers",splash:"Yes – splash zones",babysit:"Yes",famsuite:"Yes – family suites with bunk beds",kidspool:"Yes",teens:"Yes – Teens Club",beach:"Yes",notes:"Laser tag; bowling; on-site medical; AquaCourse"},
-  "Royalton Splash Punta Cana":{wp:"Yes",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"Yes – Teens Club",beach:"Yes",notes:""},
-  "Moon Palace Cancun":{wp:"Yes – waterpark included free",lazy:"Yes",splash:"Yes – kids splash zones",babysit:"Yes – free supervised",famsuite:"Yes – swim-up suites",kidspool:"Yes",teens:"Yes",beach:"Yes",notes:"Bowling; arcade; flow rider; wave pool; 9 pools"},
-  "Moon Palace The Grand Punta Cana":{wp:"Yes – free waterpark",lazy:"Yes",splash:"Yes – kids splash zones",babysit:"Yes – free supervised",famsuite:"Yes – connecting rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",notes:"9 pools; wave pool; flow rider; bowling; 19 restaurants"},
-  "Aulani A Disney Resort & Spa":{wp:"Yes – Waikolohe Valley (slides + lazy river)",lazy:"Yes – 2 tubing adventures",splash:"Yes – Menehune Bridge splash zone",babysit:"Yes – Aunty's Beach House",famsuite:"Yes – villas",kidspool:"Yes – toddler pool",teens:"Yes – teen spa",beach:"Yes – Ko Olina lagoon",notes:"Disney character meet & greets; Rainbow Reef snorkel lagoon; ukulele lessons"},
-  "Grand Wailea A Waldorf Astoria Resort":{wp:"Yes – 9 connected pools with slides",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes",teens:"No",beach:"Yes – Wailea Beach",notes:"9 pools connected by slides & waterways; grotto bar"},
-  "Fairmont Scottsdale Princess":{wp:"Yes – on-site waterpark + lazy river",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – desert resort",notes:"Largest waterpark at any Arizona resort"},
-  "The Ritz-Carlton Orlando Grande Lakes":{wp:"Yes – Grande Lakes Water Park (waterslides + lazy river)",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Ritz Kids pool",teens:"No",beach:"No",notes:"Grande Lakes Water Park; kayak eco-tours; falconry; wildlife tours"},
-  "JW Marriott Orlando Grande Lakes":{wp:"Yes – Grande Lakes Water Park",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No",notes:"Shared Grande Lakes Water Park; AquaCourse 360; kayaking"},
-  "Sun City Resort":{wp:"Yes – Valley of Waves waterpark",lazy:"Yes",splash:"Yes",babysit:"Yes – evening crèche",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – inland",notes:"Valley of Waves wave pool; safari nearby; casino complex"},
-  "Forte Village Resort":{wp:"Yes – aqua park + waterslides",lazy:"No",splash:"Yes – multiple splash areas",babysit:"Yes – Baby Club 0+",famsuite:"Yes – bungalows & villas",kidspool:"Yes",teens:"Yes – teens disco",beach:"Yes – private Sardinia",notes:"Go-kart; bowling; Barbie house; sports academies; 10 hotels in one resort"},
-  "Holiday Inn Vana Nava Hua Hin":{wp:"Yes – Vana Nava Water Jungle (Thailand's largest)",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – inland waterpark",notes:"Thailand's first and largest water jungle park on-site"},
-  "Vinpearl Resort & Spa Nha Trang Bay":{wp:"Yes – Vinwonders waterpark on-site",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – island",notes:"Vinwonders theme park; cable car from mainland"},
-  "Limak Lara De Luxe Hotel & Resort":{wp:"Yes – on-site aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – private",notes:""},
-  "Delphin Palace Hotel":{wp:"Yes – free waterpark access",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – private Lara Beach",notes:""},
-  "Maxx Royal Belek Golf Resort":{wp:"Yes – on-site waterpark",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – private",notes:"Golf course; mega aqua park"},
-  "Grecotel Marine Palace & Aqua Park":{wp:"Yes – on-site aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Crete",notes:"On-site aqua park; all-inclusive"},
-  "Princesa Yaiza Suite Hotel Resort":{wp:"Yes – waterpark",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – Lanzarote",notes:"On-site waterpark; Lanzarote volcanic landscape"},
-  "Martinhal Sagres Beach Family Resort":{wp:"No",lazy:"No",splash:"Yes – baby pool",babysit:"Yes",famsuite:"Yes – villas",kidspool:"Yes – baby pool",teens:"Yes – Tweens",beach:"Yes – Sagres",notes:"5 kids clubs; Crèche from 6m; private baby swim lessons; sports academies"},
-  "AYANA Resort Bali":{wp:"No",lazy:"No",splash:"Yes – Ocean Adventure Playground",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – 2 waterslide kids pool",teens:"No",beach:"Yes – private Kubu Beach",notes:"19 restaurants; 14 pools; Rock Bar iconic; 90 hectares"},
-  "Padma Resort Legian":{wp:"No",lazy:"No",splash:"Yes – lagoon & waterslide",babysit:"Yes",famsuite:"Yes – suites & interconnecting",kidspool:"Yes – lagoon waterslide pool",teens:"No",beach:"Yes – Legian Beach",notes:"Swim-up bar; foam parties; mermaid swimming"},
-  "Sofitel Bali Nusa Dua Beach Resort":{wp:"No",lazy:"No",splash:"Yes – kids pool slides & fountains",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes – Kupu-Kupu kids pool",teens:"No",beach:"Yes – Nusa Dua",notes:"Toddler room 2024; outdoor movie nights"},
-  "Six Senses Laamu":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – family villas with private pools",kidspool:"Yes – The Den pool",teens:"No",beach:"Yes – private",notes:"SHELL marine biology centre; Junior Marine Biologist programme; surfing"},
-  "Four Seasons Resort Maldives at Kuda Huraa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – connecting rooms",kidspool:"Yes – Kuda Mas pool",teens:"No",beach:"Yes – private",notes:"Free kids club; marine biology programme; water sports"},
-  "Amilla Maldives Resort and Residences":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – from birth",famsuite:"Yes – 6-bed villas",kidspool:"Yes – Sultan's Village pool",teens:"Yes – E-Zone teens",beach:"Yes – private",notes:"Longest kids club hours in Maldives; Friday disco; teen programme"},
-  "Hotel Xcaret Mexico":{wp:"Nearby – Xcaret Parks included",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes",notes:"All-parks inclusive: Xcaret, Xel-Há, Xplor etc. all included"},
-  "The Breakers Palm Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – family rooms",kidspool:"Yes – 4 pools",teens:"No",beach:"Yes – private",notes:"Family Entertainment Center; mini golf; arcade; basketball"},
-  "Four Seasons Resort Koh Samui":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – family pool villas",kidspool:"Yes – kids pool",teens:"No",beach:"Yes – private",notes:"Private beach; free kids club; snorkelling"},
-  "Shangri-La Le Touessrok":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – T-Club pool",teens:"Yes – teens",beach:"Yes – Trou d'Eau Douce",notes:"Private island access; watersports lagoon"},
-  "Four Seasons Resort Mauritius at Anahita":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – 2–5 bed residences",kidspool:"Yes – Kids For All Seasons pool",teens:"Yes – teens",beach:"Yes – private lagoon",notes:"Private butler; golf; pop-up cinema"},
+  "Address Beach Resort":{wp:"No",lazy:"No",splash:"Yes – outdoor splash pad",babysit:"Yes",famsuite:"Yes – interconnecting rooms",kidspool:"Yes – family pool",teens:"No",beach:"Yes – JBR beach",allinc:"No",notes:"World's highest infinity pool; 4–11 yrs kids club 9am–9pm"},
+  "Address Boulevard":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – interconnecting",kidspool:"Yes",teens:"No",beach:"No – city hotel",allinc:"No",notes:"Downtown Dubai location"},
+  "Address Creek Harbour":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – interconnecting",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:"Creek Harbour views"},
+  "Address Downtown":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – interconnecting",kidspool:"Yes",teens:"No",beach:"No – city hotel",allinc:"No",notes:"Burj Khalifa views"},
+  "Address Dubai Mall":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – interconnecting",kidspool:"Yes",teens:"No",beach:"No – city hotel",allinc:"No",notes:"Dubai Mall connected"},
+  "Address Dubai Marina":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – interconnecting",kidspool:"Yes",teens:"No",beach:"Yes – marina beach",allinc:"No",notes:""},
+  "Address Fountain Views":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:"Burj Khalifa fountain views"},
+  "Address Sky View":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:"Sky bridge views"},
+  "Address Palace Dubai Creek Harbour":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:""},
+  "Amwaj Rotana":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – interconnecting",kidspool:"Yes",teens:"No",beach:"Yes – JBR beach",allinc:"No",notes:""},
+  "Anantara The Palm Dubai Resort":{wp:"No",lazy:"No",splash:"Yes – lagoon splash areas",babysit:"Yes – certified babysitters",famsuite:"Yes – lagoon villas",kidspool:"Yes – 3 lagoon pools",teens:"Yes – Chill Teens Club",beach:"Yes – private",allinc:"No",notes:"Thai-inspired overwater villas; lagoon pools"},
+  "Burj Al Arab":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – all duplex suites",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:"Kids club floor 18; access to Jumeirah KiDS Club; Wild Wadi nearby"},
+  "Crowne Plaza Dubai Festival City":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:"Festival City mall access"},
+  "Al Raha Beach Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Al Raha Beach",allinc:"No",notes:""},
+  "The St. Regis Saadiyat Island Resort Abu Dhabi":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – butler babysitting",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Saadiyat Island",allinc:"No",notes:"3km natural beach; cultural district"},
+  "Park Hyatt Abu Dhabi Hotel and Villas":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – villas",kidspool:"Yes – Camp Hyatt pool",teens:"No",beach:"Yes – Saadiyat",allinc:"No",notes:""},
+  "Grand Millenium Al Wahda":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – city hotel",allinc:"No",notes:"Mall connected"},
+  "Anantara Eastern Mangroves Abu Dhabi Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – mangroves",allinc:"No",notes:"Kayaking through mangroves"},
+  "InterContinental Ras Al Khaimah Resort and Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "DoubleTree by Hilton Resort & Spa Marjan Island":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Chuckles Kids pool",teens:"No",beach:"Yes – Marjan Island",allinc:"No",notes:""},
+  "Marjan Island Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Marjan Island",allinc:"No",notes:""},
+  "Waldorf Astoria Ras Al Khaimah":{wp:"No",lazy:"No",splash:"Yes – splash pad",babysit:"Yes",famsuite:"Yes – family rooms & suites",kidspool:"Yes – Pearl Kids pool",teens:"Yes – Drift Teens",beach:"Yes – private",allinc:"No",notes:"Cinema for children; heated family lagoon pool"},
+  "The Ritz-Carlton Ras Al Khaimah Al Wadi Desert":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – desert villas",kidspool:"Yes",teens:"No",beach:"No – desert resort",allinc:"No",notes:"Desert safari; glamping; al fresco dining"},
+  "The Cove Rotana Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Flipper's pool",teens:"No",beach:"Yes – private cove",allinc:"No",notes:""},
+  "Ajman Hotel by Blazon Hotels":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Ajman beach",allinc:"No",notes:""},
+  "Bahi Ajman Palace Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – private beach",allinc:"No",notes:""},
+  "Four Seasons Hotel Bahrain Bay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Kids For All Seasons pool",teens:"No",beach:"Yes – private",allinc:"No",notes:"Water sports; cultural activities"},
+  "Ritz Carlton Bahrain":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes – Ritz Kids pool",teens:"No",beach:"Yes – private 1km beach",allinc:"No",notes:""},
+  "Sofitel Bahrain Zallaq Thalassa Sea & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:"Thalasso spa"},
+  "Vida Beach Resort Marassi Al Bahrain":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Marassi Beach",allinc:"No",notes:""},
+  "Wyndham Doha West Bay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – city hotel",allinc:"No",notes:""},
+  "DusitD2 Salwa Doha":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:""},
+  "Centara West Bay Hotel & Residences Doha":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Camp Centara pool",teens:"No",beach:"No",allinc:"No",notes:""},
+  "voco Doha West Bay Suites":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:""},
+  "Kempinski Residences and Suites Doha":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – residences",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:""},
+  "Marsa Malaz Kempinski":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – Pearl-Qatar",allinc:"No",notes:"Pearl Qatar island"},
+  "Banyan Tree Doha":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – pool villas",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:""},
+  "Salalah Rotana Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Flipper's pool",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Millennium Hotel and Convention Centre Kuwait":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Anantara Layan Phuket Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – certified",famsuite:"Yes – pool villas",kidspool:"Yes – Chang Club pool",teens:"No",beach:"Yes – Layan Beach",allinc:"No",notes:""},
+  "The Senses Resort & Pool Villas Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – pool villas",kidspool:"Yes",teens:"No",beach:"No – hilltop",allinc:"No",notes:""},
+  "Pullman Phuket Arcadia Naithon Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Naithon Beach",allinc:"No",notes:""},
+  "Pullman Phuket Panwa Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Sapparot pool",teens:"No",beach:"Yes – Panwa Beach",allinc:"No",notes:""},
+  "Saii Laguna Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – lagoon beach",allinc:"No",notes:"Lagoon cable ski nearby"},
+  "Anantara Vacation Club Mai Khao Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – 2/3-bed villas",kidspool:"Yes",teens:"Yes",beach:"Yes – Mai Khao",allinc:"No",notes:""},
+  "Kata Rocks":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – villa suites",kidspool:"Yes",teens:"No",beach:"Yes – Kata Beach",allinc:"No",notes:"Luxury sky villas"},
+  "Phuket Marriott Resort & Spa Nai Yang Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Nai Yang",allinc:"No",notes:""},
+  "Metadee Concept Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Renaissance Phuket Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Mai Khao",allinc:"No",notes:""},
+  "Samara Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes – Samara Kids pool",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "InterContinental Phuket Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Planet Trekker pool",teens:"No",beach:"Yes – Kamala Beach",allinc:"No",notes:""},
+  "Movenpick Myth Hotel Patong Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Little Birds pool",teens:"No",beach:"No – Patong area",allinc:"No",notes:""},
+  "Amatara Welleisure Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – pool suites",kidspool:"Yes",teens:"No",beach:"Yes – Cape Panwa",allinc:"No",notes:"Wellness resort"},
+  "Anantara Riverside Bangkok Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – riverside",allinc:"No",notes:"Chao Phraya riverside; boat shuttle"},
+  "Anantara Siam Bangkok Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:"City centre; shopping"},
+  "Bangkok Marriott Hotel The Surawongse":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Bangkok Marriott Marquis Queen's Park":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Mandarin Oriental Bodrum":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – certified",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – private beach",allinc:"No",notes:""},
+  "Kefaluka Resort Bodrum":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Blue Dreams Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Baia Bodrum Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Azka Otel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "The Oba Hotel Torba":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Torba Bay",allinc:"No",notes:""},
+  "Sirene Luxury Bodrum Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Kaya Palazzo Resort & Residences Le Chic Bodrum":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – residences",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Swissotel Resort Bodrum Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Göltürkbükü",allinc:"No",notes:""},
+  "Greenwood Suites Resort":{wp:"Yes – aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Sherwood Exclusive Lara":{wp:"Yes – waterpark",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"Yes – Lara Beach",allinc:"No",notes:""},
+  "Limak Lara De Luxe Hotel & Resort":{wp:"Yes – on-site aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Delphin Palace Hotel":{wp:"Yes – free waterpark access",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – private Lara Beach",allinc:"No",notes:""},
+  "Club Hotel Sera":{wp:"Yes – waterslides",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Mini Club pool",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Liberty Hotels Lara":{wp:"Yes – aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Libby Kids pool",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Concorde De Luxe Resort":{wp:"Yes – aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family duplex suites",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Saturn Palace Resort Hotel":{wp:"Yes – waterpark",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Lara Barut Collection":{wp:"Yes – aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Megasaray Westbeach Antalya":{wp:"Yes – waterslides",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Rixos Downtown Antalya":{wp:"Yes – Rixy waterpark area",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"Yes – Rixy Teens",beach:"Yes",allinc:"No",notes:""},
+  "Istanbul Marriott Hotel Asia":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Mandarin Oriental Bosphorus Istanbul":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – Bosphorus views",allinc:"No",notes:""},
+  "The Ayodya Resort Bali":{wp:"No",lazy:"No",splash:"Yes – water slides & splash pad",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – waterslide pool",teens:"No",beach:"Yes – Nusa Dua",allinc:"No",notes:"Pool with waterslide; Nusa Dua beach"},
+  "Sofitel Bali Nusa Dua Beach Resort":{wp:"No",lazy:"No",splash:"Yes – kids pool slides & fountains",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes – Kupu-Kupu kids pool",teens:"No",beach:"Yes – Nusa Dua",allinc:"No",notes:"Toddler room (2024); outdoor movie nights"},
+  "AYANA Resort Bali":{wp:"No",lazy:"No",splash:"Yes – Ocean Adventure Playground",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – 2 waterslide kids pool",teens:"No",beach:"Yes – private Kubu Beach",allinc:"No",notes:"19 restaurants; 14 pools; Rock Bar iconic; 90 hectares"},
+  "RIMBA by AYANA Bali":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – waterslide",teens:"No",beach:"Yes – AYANA beach",allinc:"No",notes:"Largest kids club in Bali; cultural museum; AYANA Farm"},
+  "Courtyard Bali Seminyak Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Seminyak",allinc:"No",notes:""},
+  "Peppers Seminyak":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – Seminyak",allinc:"No",notes:""},
+  "Mulia Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – luxury suites",kidspool:"Yes – family pool",teens:"Yes – teen zone",beach:"Yes – Nusa Dua",allinc:"No",notes:"Two kids clubs; Sunday Brunch"},
+  "Mandapa A Ritz-Carlton Reserve":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – certified",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – riverside Ubud",allinc:"No",notes:"River valley setting; cultural immersion; rafting"},
+  "Padma Resort Legian":{wp:"No",lazy:"No",splash:"Yes – lagoon & waterslide",babysit:"Yes",famsuite:"Yes – suites & interconnecting",kidspool:"Yes – lagoon waterslide pool",teens:"No",beach:"Yes – Legian Beach",allinc:"No",notes:"Swim-up bar; foam parties; mermaid swimming"},
+  "Padma Resort Ubud":{wp:"No",lazy:"No",splash:"Yes – shallow pool",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes – 89m infinity pool + kids pool",teens:"No",beach:"No – Ubud jungle",allinc:"No",notes:"89m infinity pool; Wolly Kids Club; jungle setting"},
+  "Amilla Maldives Resort and Residences":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – from birth",famsuite:"Yes – 6-bed villas",kidspool:"Yes – Sultan's Village pool",teens:"Yes – E-Zone teens",beach:"Yes – private",allinc:"No",notes:"Longest kids club hours in Maldives; Friday disco; teen programme"},
+  "Ayada Maldives":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Constance Halaveli Maldives":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family beach villas",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Finolhu Baa Atoll Maldives":{wp:"No",lazy:"No",splash:"Yes – outdoor play areas",babysit:"Yes – crèche",famsuite:"Yes – beach/lagoon villas",kidspool:"Yes – Oceaneers pool",teens:"No",beach:"Yes – 1.8km sandbank",allinc:"No",notes:"UNESCO Biosphere Reserve; pirate cruise; movie nights"},
+  "Four Seasons Resort Maldives at Kuda Huraa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – connecting rooms",kidspool:"Yes – Kuda Mas pool",teens:"No",beach:"Yes – private",allinc:"No",notes:"Free kids club; marine biology programme; water sports"},
+  "LUX South Ari Atoll":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes",teens:"Yes – teens",beach:"Yes – private",allinc:"No",notes:"Whale shark snorkelling; DJ lessons for teens"},
+  "Ozen Life Maadhoo":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:"All-inclusive; underwater restaurant"},
+  "Ozen Reserve Bolifushi":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:""},
+  "Six Senses Laamu":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – family villas with private pools",kidspool:"Yes – The Den pool",teens:"No",beach:"Yes – private",allinc:"No",notes:"SHELL marine biology centre; Junior Marine Biologist programme; surfing"},
+  "Renaissance Kuala Lumpur Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Ritz Carlton Kuala Lumpur":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Ritz Kids pool",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Mandarin Oriental Kuala Lumpur":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:"KLCC park views"},
+  "Pavilion Hotel Kuala Lumpur":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Rangers pool",teens:"No",beach:"No – city",allinc:"No",notes:"Pavilion mall connected"},
+  "Crimson Resort and Spa Mactan":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Mactan",allinc:"No",notes:"Beachfront; coral reef snorkelling"},
+  "Bluewater Maribago Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Maribago",allinc:"No",notes:""},
+  "Jpark Island Resort and Waterpark Cebu":{wp:"Yes",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:"On-site waterpark; island setting"},
+  "bai Hotel Cebu":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Montebello Hotel Cebu":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No",allinc:"No",notes:""},
+  "Mövenpick Resort & Spa Boracay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Boracay",allinc:"No",notes:"White Beach access"},
+  "Crimson Resort and Spa Boracay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Boracay",allinc:"No",notes:""},
+  "The Lind Boracay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – White Beach",allinc:"No",notes:""},
+  "Fairways & Bluewater Boracay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:"Golf course; mountain views"},
+  "Shangri-La Boracay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – private cove",allinc:"No",notes:"Private cove; away from main beach"},
+  "Feliz Hotel Boracay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Boracay",allinc:"No",notes:""},
+  "Okada Manila":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – 9am–9pm",teens:"No",beach:"No – city",allinc:"No",notes:"Casino resort; fountain show; multiple pools"},
+  "Manila Marriott Hotel at Newport World Resorts":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:"Newport City; near airport"},
+  "Solaire Resort North":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:"Entertainment complex"},
+  "Admiral Hotel Manila MGallery Collection":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Manila Bay",allinc:"No",notes:"Manila Bay views; heritage property"},
+  "El Nido Resorts Apulit Island":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family cottages",kidspool:"Yes",teens:"No",beach:"Yes – island",allinc:"No",notes:"Overwater cottages; snorkelling; island activities"},
+  "Discovery Coron":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:"Diving; WWII wreck sites nearby"},
+  "Astoria Palawan":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Princesa Garden Island Resort and Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:"Underground river nearby"},
+  "Nay Palad Hideaway":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – island",allinc:"No",notes:"Surf; island eco-resort"},
+  "Pan Pacific Singapore":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:"Marina Bay area"},
+  "PARKROYAL COLLECTION Marina Bay Singapore":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:"Garden on the Bay hotel"},
+  "Shangri-La Singapore":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Buds pool",teens:"No",beach:"No – city",allinc:"No",notes:"Buds by Shangri-La dedicated water play area"},
+  "The Ritz-Carlton Millenia Singapore":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "The Ritz-Carlton Pune":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Taj Lands End Mumbai":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Bandra seafront",allinc:"No",notes:""},
+  "JW Marriott Mumbai Juhu":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Juhu Beach",allinc:"No",notes:""},
+  "The Westin Mumbai Garden City":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Kerry Hotel Pudong Shanghai":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Adventure Zone pool",teens:"No",beach:"No – river views",allinc:"No",notes:"Adventure Zone"},
+  "Mandarin Oriental Pudong Shanghai":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – riverside",allinc:"No",notes:""},
+  "Pudong Shangri-La Shanghai":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – K20 pool",teens:"No",beach:"No – riverside",allinc:"No",notes:""},
+  "The Portman Ritz-Carlton Shanghai":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Rosewood Hong Kong":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – Victoria Harbour",allinc:"No",notes:""},
+  "Crown Paradise Club":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – free supervised",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Cancun",allinc:"Yes",notes:"All-inclusive; free childcare from 18 months"},
+  "Moon Palace Cancun":{wp:"Yes – waterpark included free",lazy:"Yes",splash:"Yes – kids splash zones",babysit:"Yes – free supervised",famsuite:"Yes – swim-up suites",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"Bowling; arcade; flow rider; wave pool; 9 pools"},
+  "Moon Palace Nizuc":{wp:"Yes – access to Grand waterpark",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"Access to Moon Palace Grand waterpark"},
+  "Paradisus Cancun":{wp:"No – pools",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Kidsdom pool",teens:"Yes – teens",beach:"Yes",allinc:"Yes",notes:"Kidsdom from 1 yr"},
+  "Royalton Riviera Cancun Resort & Casino":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – Hangout Teens",beach:"Yes",allinc:"Yes",notes:""},
+  "Nickelodeon Hotels & Resorts Riviera Maya":{wp:"Yes – Aqua Nick (6 acres)",lazy:"Yes – lazy river",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – Hangout",beach:"Yes",allinc:"Yes",notes:"Character meet & greets; Nickelodeon slime experiences; Club Nick"},
+  "Generations Riviera Maya":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – teens",beach:"Yes",allinc:"Yes",notes:"Adults + kids area; swim-up rooms"},
+  "Grand Palladium Colonial Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes – teens",beach:"Yes",allinc:"Yes",notes:"Shared amenities with White Sand"},
+  "Grand Palladium White Sand Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Grand Riviera Princess":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Princess Family Club at Grand Riviera Princess":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – free 24hrs",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"Dedicated family wing; 24hr free childcare"},
+  "Hotel Xcaret Mexico":{wp:"Nearby – Xcaret Park included",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Tribe pool",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"All-parks inclusive; Xcaret, Xel-Há, Xplor etc. all included"},
+  "Iberostar Paraiso Del Mar":{wp:"Yes – shared waterpark complex",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"Shared waterpark with Iberostar complex"},
+  "Iberostar Tucan":{wp:"Yes – shared complex waterpark",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Star Camp pool",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"Eco-friendly; cenote access"},
+  "Ocean Riviera Paradise":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Riu Playacar":{wp:"Yes – RiuLand waterpark area",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – RiuLand pool",teens:"No",beach:"Yes",allinc:"Yes",notes:"RiuLand kids area"},
+  "Sandos Caracol Eco Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:"Cenotes; eco tours"},
+  "Sandos Playacar":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Playacar",allinc:"Yes",notes:""},
+  "BlueBay Grand Esmeralda":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Akumal Bay Beach & Wellness Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Akumal Bay",allinc:"Yes",notes:"Sea turtle snorkelling"},
+  "Azul Beach Resort Riviera Cancun by Karisma":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Viva Azteca by Wyndham":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Viva Maya by Wyndham":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Margaritaville Island Reserve Riviera Maya":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Paradisus Playa del Carmen":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Kidsdom pool",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"Kidsdom from 12 months"},
+  "Royalton Splash Riviera Cancun":{wp:"Yes – 14 slides, Caribbean's largest",lazy:"Yes – 2 lazy rivers",splash:"Yes – splash zones",babysit:"Yes",famsuite:"Yes – family suites with bunk beds",kidspool:"Yes",teens:"Yes – Teens Club",beach:"Yes",allinc:"Yes",notes:"Laser tag; bowling; on-site medical; AquaCourse"},
+  "Ocean Maya Royale":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Paradisus Los Cabos":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Kidsdom pool",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Marquis Los Cabos Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes",teens:"No",beach:"Yes – Los Cabos",allinc:"No",notes:""},
+  "Paradisus Punta Cana":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Baby Club pool",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"Baby Club from 1yr; Royal Service for families"},
+  "Royalton Punta Cana Resort & Casino":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Turbo pool",teens:"Yes – Teens",beach:"Yes",allinc:"Yes",notes:""},
+  "Nickelodeon Hotels & Resorts Punta Cana":{wp:"Yes – Aqua Nick",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – Uvero Alto",allinc:"Yes",notes:"Character meet & greets; Aqua Nick waterpark"},
+  "Royalton Splash Punta Cana":{wp:"Yes",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – Teens Club",beach:"Yes",allinc:"Yes",notes:""},
+  "Melia Caribe Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Melia Punta Cana Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Moon Palace The Grand Punta Cana":{wp:"Yes – free waterpark",lazy:"Yes",splash:"Yes – kids splash zones",babysit:"Yes – free supervised",famsuite:"Yes – connecting rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:"9 pools; wave pool; flow rider; bowling; 19 restaurants"},
+  "Ocean Blue & Sand Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Ocean Coral & Turquesa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Paradisus Grand Cana":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – teens 13–17",beach:"Yes",allinc:"Yes",notes:""},
+  "Royalton Bavaro":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Royalton CHIC Punta Cana":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"Yes",notes:""},
+  "Ocean El Faro":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"Yes",notes:""},
+  "Ocean Coral Spring":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Puerto Plata",allinc:"Yes",notes:""},
+  "Ocean Eden Bay":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Puerto Plata",allinc:"Yes",notes:""},
+  "Moon Palace Jamaica Grande":{wp:"Yes – waterpark",lazy:"Yes",splash:"Yes",babysit:"Yes – free supervised",famsuite:"Yes",kidspool:"Yes",teens:"Yes",beach:"Yes – Montego Bay",allinc:"Yes",notes:""},
+  "Royalton Blue Waters":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – Montego Bay",allinc:"Yes",notes:""},
+  "Royalton Negril":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – Negril",allinc:"Yes",notes:""},
+  "Riu Guanacaste":{wp:"Yes – RiuLand",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – RiuLand pool",teens:"No",beach:"Yes – Guanacaste",allinc:"Yes",notes:""},
+  "Royalton Saint Lucia Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – Saint Lucia",allinc:"Yes",notes:""},
+  "Windjammer Landing Villa Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – villa suites",kidspool:"Yes",teens:"No",beach:"Yes – Labrelotte Bay",allinc:"No",notes:""},
+  "JW Marriott Phuket Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Kids Pavilion pool",teens:"No",beach:"Yes – Mai Khao",allinc:"No",notes:"Turtle release programme"},
+  "SAii Laguna Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes",allinc:"No",notes:""},
+  "Club Med Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes – Teen Club",beach:"Yes – Kata Noi Beach",allinc:"No",notes:"All-inclusive; circus arts; sports"},
+  "Phuket Marriott Resort & Spa Merlin Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Tri Trang Beach",allinc:"No",notes:""},
+  "Thavorn Beach Village Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Kamala Beach",allinc:"No",notes:""},
+  "Phuket Graceland Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Patong",allinc:"No",notes:""},
+  "Dusit Thani Laguna Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes – Busy Bee pool",teens:"No",beach:"Yes – Bang Tao",allinc:"No",notes:"Lagoon access; cycling"},
+  "Banyan Tree Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – certified",famsuite:"Yes – pool villas",kidspool:"Yes – Rangers pool",teens:"No",beach:"Yes – Bang Tao",allinc:"No",notes:"All-pool-villa resort"},
+  "Rosewood Phuket":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – pavilion suites",kidspool:"Yes – Explorers pool",teens:"No",beach:"Yes – Emerald Bay",allinc:"No",notes:""},
+  "Holiday Inn Vana Nava Hua Hin":{wp:"Yes – Vana Nava Water Jungle waterpark on-site",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Bryde's pool",teens:"No",beach:"No – inland waterpark",allinc:"No",notes:"Vana Nava Water Jungle is Thailand's first and largest water jungle park"},
+  "Holiday Inn Resort Samui":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Jungle's Book pool",teens:"No",beach:"Yes – Maenam Beach",allinc:"No",notes:""},
+  "Four Seasons Resort Koh Samui":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – family pool villas",kidspool:"Yes – kids pool",teens:"No",beach:"Yes – private",allinc:"No",notes:"Private beach; free kids club; snorkelling"},
+  "Centara Reserve Samui":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Camp Safari pool",teens:"No",beach:"Yes – Chaweng Noi",allinc:"No",notes:""},
+  "Dusit Thani Krabi Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Klong Muang",allinc:"No",notes:""},
+  "Pimalai Resort and Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – pool villas",kidspool:"Yes",teens:"No",beach:"Yes – Koh Lanta",allinc:"No",notes:""},
+  "Graceland Khao Lak Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Khao Lak",allinc:"No",notes:""},
+  "Avani+ Khao Lak Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Khao Lak",allinc:"No",notes:""},
+  "TUI BLUE Mai Khao Lak":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – BabyClub pool",teens:"No",beach:"Yes – Mai Khao Lak",allinc:"No",notes:""},
+  "Novotel Living Bangkok Sukhumvit Legacy":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – city",allinc:"No",notes:""},
+  "Birds & Bees Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family bungalows",kidspool:"Yes",teens:"No",beach:"No – Pattaya area",allinc:"No",notes:"Unique nature resort"},
+  "Saikaew Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"Yes – Koh Samet",allinc:"No",notes:""},
+  "Omni Amelia Island Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Amelia Island",allinc:"No",notes:"Golf; nature tours"},
+  "Four Seasons Resort Orlando at Walt Disney World Resort":{wp:"Nearby – Disney parks",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Kids For All Seasons pool",teens:"Yes",beach:"No",allinc:"No",notes:"Disney shuttle; Golf; complimentary Disney transport"},
+  "The Ritz-Carlton Orlando Grande Lakes":{wp:"Yes – Grande Lakes Water Park (waterslides + lazy river)",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Ritz Kids pool",teens:"No",beach:"No",allinc:"No",notes:"Grande Lakes Water Park; kayak eco-tours; falconry; wildlife tours"},
+  "JW Marriott Orlando Grande Lakes":{wp:"Yes – Grande Lakes Water Park",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Ritz Kids",teens:"No",beach:"No",allinc:"No",notes:"Shared Grande Lakes Water Park; AquaCourse 360; kayaking"},
+  "Loews Miami Beach Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – SOBE Kids pool",teens:"No",beach:"Yes – South Beach",allinc:"No",notes:""},
+  "The Breakers Palm Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – family rooms",kidspool:"Yes – 4 pools",teens:"No",beach:"Yes – private",allinc:"No",notes:"Family Entertainment Center; mini golf; arcade; basketball"},
+  "Aulani A Disney Resort & Spa":{wp:"Yes – Waikolohe Valley (slides + lazy river)",lazy:"Yes – 2 tubing adventures",splash:"Yes – Menehune Bridge splash zone",babysit:"Yes – Aunty's Beach House",famsuite:"Yes – villas",kidspool:"Yes – toddler pool",teens:"Yes – teen spa",beach:"Yes – Ko Olina lagoon",allinc:"No",notes:"Disney character meet & greets; Rainbow Reef snorkel lagoon; ukulele lessons"},
+  "Grand Wailea A Waldorf Astoria Resort":{wp:"Yes – Wailea Canyon 9 connected pools with slides",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes",teens:"No",beach:"Yes – Wailea Beach",allinc:"No",notes:"9 pools connected by slides & waterways; grotto bar"},
+  "Four Seasons Resort Maui at Wailea":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes",teens:"No",beach:"Yes – Wailea",allinc:"No",notes:""},
+  "Omni La Costa Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Kidtopia pool",teens:"No",beach:"No – Carlsbad",allinc:"No",notes:"Golf; spa; tennis"},
+  "Montage Laguna Beach":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Paintbox pool",teens:"No",beach:"Yes – Laguna Beach",allinc:"No",notes:"Art programme for kids"},
+  "Carmel Valley Ranch":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – inland",allinc:"No",notes:"Ranch activities; bee hives; stargazing"},
+  "Terranea Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Tide Pool pool",teens:"No",beach:"Yes – Rancho Palos Verdes",allinc:"No",notes:"Tide pool exploration; kayaking"},
+  "Omni Hilton Head Oceanfront Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Kid's Camp pool",teens:"No",beach:"Yes – Hilton Head",allinc:"No",notes:""},
+  "The Sanctuary at Kiawah Island Golf Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Kamp Kiawah pool",teens:"No",beach:"Yes – Kiawah Island",allinc:"No",notes:"Golf; nature walks; bike trails"},
+  "Tyler Place Family Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – extensive childcare",famsuite:"Yes – family cottages",kidspool:"Yes",teens:"No",beach:"No – Lake Champlain",allinc:"No",notes:"All-inclusive family resort; age-specific programmes from infants"},
+  "Winnetu Oceanside Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – Edgartown",allinc:"No",notes:"Martha's Vineyard; lobster bakes"},
+  "Omni Mount Washington Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – White Mountains",allinc:"No",notes:"Ski resort in winter; hiking in summer"},
+  "Fairmont Scottsdale Princess":{wp:"Yes – on-site waterpark + lazy river",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Trailblazers pool",teens:"No",beach:"No – desert resort",allinc:"No",notes:"Largest waterpark at any Arizona resort"},
+  "The Phoenician":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Funicians pool",teens:"No",beach:"No – Scottsdale desert",allinc:"No",notes:"Sports complex; cactus garden"},
+  "The Ritz-Carlton Bachelor Gulch":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Ritz Kids pool",teens:"No",beach:"No – mountain/ski",allinc:"No",notes:"Ski-in ski-out; mountain activities"},
+  "Viceroy Snowmass":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Camp V pool",teens:"No",beach:"No – ski resort",allinc:"No",notes:"Ski-in ski-out; summer hiking"},
+  "JW Marriott San Antonio Hill Country Resort & Spa":{wp:"Yes – Lazy River + waterslides on-site",lazy:"Yes – lazy river",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – Hill Country",allinc:"No",notes:"Water park complex; golf; nature trails"},
+  "Hyatt Regency Lost Pines Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Camp Hyatt pool",teens:"No",beach:"No – Lost Pines",allinc:"No",notes:"Waterslide; horseback riding; nature activities"},
+  "Sun City Resort":{wp:"Yes – Valley of Waves waterpark",lazy:"Yes",splash:"Yes",babysit:"Yes – evening crèche",famsuite:"Yes",kidspool:"Yes",teens:"No",beach:"No – inland",allinc:"No",notes:"Valley of Waves wave pool; safari nearby; casino complex"},
+  "The Oyster Box":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – Umhlanga",allinc:"No",notes:"Lighthouse; Zulu cultural experiences"},
+  "Fancourt Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Garden Route",allinc:"No",notes:"Golf; spa; fynbos"},
+  "Pezula Nature Retreat":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – suites",kidspool:"Yes",teens:"No",beach:"No – Knysna",allinc:"No",notes:"Nature trails; whale watching seasonal"},
+  "Shangri-La Le Touessrok":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – T-Club pool",teens:"Yes – teens",beach:"Yes – Trou d'Eau Douce",allinc:"No",notes:"Private island access; watersports lagoon"},
+  "Heritage Le Telfair Golf & Wellness Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – Baby Club 0–35 months",famsuite:"Yes – family villas",kidspool:"Yes – Timomo pool",teens:"No",beach:"Yes – Bel Ombre",allinc:"No",notes:"Baby Club from birth; golf"},
+  "LUX* Belle Mare":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family chalets",kidspool:"Yes – PLAY pool",teens:"No",beach:"Yes – Belle Mare",allinc:"No",notes:"Mile-long beach; kite surfing"},
+  "Constance Belle Mare Plage":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Coconut Tribe pool",teens:"No",beach:"Yes – 1km beach",allinc:"No",notes:"Babysitting; water sports"},
+  "Club Med La Pointe aux Canonniers":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – Baby Club 4m+",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes – teens",beach:"Yes – Grand Baie",allinc:"Yes",notes:"All-inclusive; Baby Club from 4 months"},
+  "Four Seasons Resort Mauritius at Anahita":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – 2–5 bed residences",kidspool:"Yes – Kids For All Seasons pool",teens:"Yes – teens",beach:"Yes – private lagoon",allinc:"No",notes:"Private butler; golf; pop-up cinema"},
+  "Four Seasons Resort Seychelles":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – tree-house villas",kidspool:"Yes – kids pool",teens:"No",beach:"Yes – Petite Anse",allinc:"No",notes:"Kids club weekends/holidays; coral cabana; surf lessons"},
+  "Constance Ephelia":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes – Coconut Tribe pool",teens:"No",beach:"Yes – Port Launay",allinc:"No",notes:"Two beaches; water sports"},
+  "Raffles Seychelles":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – on request",famsuite:"Yes – pool villas",kidspool:"Yes",teens:"Yes – recreation club teens",beach:"Yes – Praslin",allinc:"No",notes:"Largest infinity pool in Indian Ocean; snorkelling"},
+  "Sarova Whitesands Beach Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Mombasa",allinc:"No",notes:""},
+  "Hemingways Watamu":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family cottages",kidspool:"Yes",teens:"No",beach:"Yes – Watamu",allinc:"No",notes:"Marine national reserve; snorkelling"},
+  "Mazagan Beach & Golf Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – El Jadida",allinc:"No",notes:"Golf; surf; thalasso spa"},
+  "Fairmont Royal Palm Marrakech":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – inland",allinc:"No",notes:"Golf; Atlas Mountains views"},
+  "Club Med Marrakech La Palmeraie":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"No – palmery",allinc:"Yes",notes:"All-inclusive; horse riding; archery"},
+  "Four Seasons Resort Sharm El Sheikh":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Kids For All Seasons pool",teens:"No",beach:"Yes – Red Sea",allinc:"No",notes:"Coral reef snorkelling; water sports"},
+  "Rixos Premium Seagate":{wp:"Yes – Rixy Kids area",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Rixy pool",teens:"Yes – teens",beach:"Yes – Red Sea",allinc:"Yes",notes:"Sharm El Sheikh; reef access"},
+  "Zuri Zanzibar":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Kendwa Beach",allinc:"No",notes:""},
+  "The Residence Zanzibar":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – butler service",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – private",allinc:"No",notes:"Private beach; butler service"},
+  "Mokuti Etosha Lodge":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family bungalows",kidspool:"Yes",teens:"No",beach:"No – Etosha",allinc:"No",notes:"Etosha safari; animal encounters"},
+  "Sani Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes – teens",beach:"Yes – Halkidiki",allinc:"No",notes:"5 hotels complex; eco-certified; sailing; paddleboarding"},
+  "Ikos Oceania":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – kids pool",teens:"Yes – teens",beach:"Yes – Halkidiki",allinc:"No",notes:"All-inclusive; water sports; tennis"},
+  "Ikos Dassia":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – teens",beach:"Yes – Corfu",allinc:"No",notes:"All-inclusive; water sports"},
+  "Grecotel La Riviera":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family bungalows",kidspool:"Yes – Grecoland pool",teens:"No",beach:"Yes – Peloponnese",allinc:"No",notes:""},
+  "Grecotel Marine Palace & Aqua Park":{wp:"Yes – on-site aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Grecoland pool",teens:"No",beach:"Yes – Crete",allinc:"No",notes:"On-site aqua park; all-inclusive"},
+  "Creta Maris Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family bungalows",kidspool:"Yes",teens:"Yes",beach:"Yes – Hersonissos",allinc:"No",notes:""},
+  "Stella Palace":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Crete",allinc:"No",notes:""},
+  "Astir Odysseus Kos Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Kos",allinc:"No",notes:""},
+  "Forte Village Resort":{wp:"Yes – aqua park + waterslides",lazy:"No",splash:"Yes – multiple splash areas",babysit:"Yes – Baby Club 0+",famsuite:"Yes – bungalows & villas",kidspool:"Yes",teens:"Yes – teens disco",beach:"Yes – private Sardinia",allinc:"No",notes:"Go-kart; bowling; Barbie house; sports academies; 10 hotels in one resort"},
+  "Verdura Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Sicily",allinc:"No",notes:"Golf; water sports"},
+  "Borgo Egnazia":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family trulli",kidspool:"Yes",teens:"No",beach:"No – Puglia inland",allinc:"No",notes:"Traditional trulli; cooking classes; olive groves"},
+  "Park Hotel Pineta Family Relax Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – Adriatic",allinc:"No",notes:"Purpose-built family resort"},
+  "Feuerstein Nature Family Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – South Tyrol mountains",allinc:"No",notes:"Mountain resort; hiking; farm animals"},
+  "Ikos Andalusia":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes – teens",beach:"Yes – Andalusia",allinc:"No",notes:"All-inclusive; water sports; tennis"},
+  "The Ritz-Carlton Abama":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes – Ritz Kids pool",teens:"No",beach:"Yes – Tenerife",allinc:"No",notes:"Golf; water sports; cliff setting"},
+  "Marbella Club Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – bungalow suites",kidspool:"Yes",teens:"No",beach:"Yes – Marbella",allinc:"No",notes:""},
+  "La Zambra Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – inland Andalusia",allinc:"No",notes:"Golf; spa"},
+  "Princesa Yaiza Suite Hotel Resort":{wp:"Yes – waterpark",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – Lanzarote",allinc:"No",notes:"On-site waterpark; Lanzarote volcanic landscape"},
+  "Martinhal Sagres Beach Family Resort":{wp:"No",lazy:"No",splash:"Yes – baby pool",babysit:"Yes",famsuite:"Yes – villas",kidspool:"Yes – baby pool",teens:"Yes – Tweens",beach:"Yes – Sagres",allinc:"No",notes:"5 kids clubs; Crèche from 6m; private baby swim lessons; sports academies"},
+  "Martinhal Quinta Family Resort":{wp:"No",lazy:"No",splash:"Yes – baby pool",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes",teens:"Yes – Tweens",beach:"No – Quinta inland",allinc:"No",notes:"5 kids clubs; Crèche from 6m"},
+  "Pine Cliffs Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites & villas",kidspool:"Yes – Porto Pirata pool",teens:"No",beach:"Yes – Algarve cliff",allinc:"No",notes:"Cliff-top location; water slides in pool area; Porto Pirata pirate themed"},
+  "Parklane Resort & Spa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – Limassol",allinc:"No",notes:""},
+  "Anassa Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – Paphos",allinc:"No",notes:""},
+  "Airelles Saint-Tropez Château de la Messardière":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – inland St Tropez",allinc:"No",notes:"Shuttle to beach; historic chateau"},
+  "Terre Blanche Hotel Spa Golf Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – villas",kidspool:"Yes",teens:"No",beach:"No – Provence",allinc:"No",notes:"Golf; spa; Provence setting"},
+  "Club Med Opio en Provence":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes – teens",beach:"No – inland",allinc:"No",notes:"All-inclusive; kids clubs from 4m+"},
+  "Pitzis Kinderhotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – extensive childcare",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Tyrolean mountains",allinc:"No",notes:"Purpose-built kids resort; childcare for all ages"},
+  "Familien Natur Resort Moar Gut":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – Salzburg",allinc:"No",notes:"Nature farm; organic food; eco resort"},
+  "The Alpina Gstaad":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"No – Gstaad ski",allinc:"No",notes:"Ski resort; mountain activities"},
+  "Kulm Hotel St. Moritz":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – St Moritz ski",allinc:"No",notes:"Winter sports; ice rink; Engadin valley"},
+  "Falkensteiner Family Hotel Diadora":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Zadar",allinc:"No",notes:"Purpose-built family resort"},
+  "Amarin Family Hotel":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Rovinj",allinc:"No",notes:""},
+  "Maxx Royal Belek Golf Resort":{wp:"Yes – on-site waterpark",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"Yes",beach:"Yes – private",allinc:"No",notes:"Golf course; mega aqua park"},
+  "Gloria Serenity Resort":{wp:"Yes – aqua park",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes",beach:"Yes",allinc:"No",notes:""},
+  "Rixos Premium Belek":{wp:"Yes – Rixy Kids waterpark",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"Yes – Rixy Teens",beach:"Yes",allinc:"No",notes:""},
+  "Mövenpick Resort Cam Ranh":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Cam Ranh Bay",allinc:"No",notes:""},
+  "Alma Resort Cam Ranh":{wp:"Yes – on-site waterpark",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family suites",kidspool:"Yes",teens:"No",beach:"Yes – Cam Ranh",allinc:"No",notes:"One of Vietnam's largest resort waterparks"},
+  "Meliá Vinpearl Phu Quoc":{wp:"Yes – Vinwonders nearby",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Phu Quoc",allinc:"No",notes:"Vinwonders theme park nearby; cable car"},
+  "Vinpearl Resort & Spa Nha Trang Bay":{wp:"Yes – Vinwonders waterpark on-site",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – island",allinc:"No",notes:"Vinwonders theme park; cable car from mainland"},
+  "New World Hoiana Beach Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Hoi An",allinc:"No",notes:"Golf; ancient town nearby"},
+  "Naman Retreat":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – Da Nang",allinc:"No",notes:"Bamboo architecture; wellness focus"},
+  "Flamingo Cat Ba Resorts":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Cat Ba Island",allinc:"No",notes:"Ha Long Bay access"},
+  "Bali Dynasty Resort":{wp:"Yes – 56m Giant Waterslide & Kids Water Fun Zone",lazy:"No",splash:"Yes – mini waterpark splash zone",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – teens area with movies & billiards",teens:"No",beach:"Yes – South Kuta beachfront",allinc:"No",notes:"Free Kupu Kupu Kids Club ages 4–16; toddler Pupa Room ages 4 & under; 4 pools; 7 restaurants; 56m waterslide; Waterbom Bali across the road"},
+  "Grand Mirage Resort Family Paradise":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Nusa Dua",allinc:"No",notes:""},
+  "Hotel Komune and Beach Club Bali":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Keramas",allinc:"No",notes:"Surf beach; skate park"},
+  "Novotel Lombok Resort and Villas":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – Senggigi",allinc:"No",notes:""},
+  "Cap Karoso":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – villas",kidspool:"Yes",teens:"No",beach:"Yes – Sumba",allinc:"No",notes:"Boutique eco resort"},
+  "LooLa Eco Adventure Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family bungalows",kidspool:"Yes",teens:"No",beach:"Yes – Batam",allinc:"No",notes:"Eco adventure; zip lines"},
+  "Hilton Tokyo Bay":{wp:"Nearby – Tokyo Disney",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Tokyo Bay",allinc:"No",notes:"Adjacent to Tokyo DisneySea & Disneyland; Disney shuttle"},
+  "Sheraton Grande Tokyo Bay Hotel":{wp:"Nearby – Tokyo Disney",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Tokyo Bay",allinc:"No",notes:"Adjacent to Tokyo Disney Resort"},
+  "Hoshino Resorts RISONARE Yatsugatake":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Yamanashi",allinc:"No",notes:"Forest adventure activities; telescope stargazing"},
+  "Club Med Tomamu":{wp:"Yes – indoor waterpark (Mina)",lazy:"Yes",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"Yes – teens",beach:"No – Hokkaido ski",allinc:"No",notes:"All-inclusive; ski resort; indoor waterpark Mina"},
+  "The Westin Rusutsu Resort":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Hokkaido ski",allinc:"No",notes:"Ski-in ski-out; amusement park on-site"},
+  "Shangri-La Rasa Sentosa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Cool Zone pool",teens:"No",beach:"Yes – Sentosa",allinc:"No",notes:"Sentosa beach access; cable car nearby"},
+  "Village Hotel Sentosa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Sentosa",allinc:"No",notes:""},
+  "Capella Singapore":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – certified",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – Sentosa",allinc:"No",notes:"Heritage colonial buildings; butler service"},
+  "Hilton Singapore Orchard":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Orchard Rd",allinc:"No",notes:""}
 };
 
 // Default amenity for any hotel not in the lookup
 function getAmenities(name){
-  return AMENITIES[name] || {wp:"",lazy:"",splash:"Yes",babysit:"Yes",famsuite:"Yes",kidspool:"Yes",teens:"",beach:"",notes:""};
+  return AMENITIES[name] || {wp:"",lazy:"",splash:"",babysit:"",famsuite:"",kidspool:"",teens:"",beach:"",allinc:"",notes:""};
 }
 
 // ============ CALENDAR ============
@@ -1677,21 +1954,21 @@ const H=[
 ];
 
 let activeCountry="All";
-let activeAmenity=null; // 'waterpark' or null
+let activeAmenities=new Set(); // e.g. {'waterpark','allinc'}
 
 function toggleAmenity(btn){
-  const chip=document.getElementById('chip-waterpark');
-  if(activeAmenity===btn.dataset.amenity){
-    activeAmenity=null;
-    chip.style.background='rgba(201,153,58,0.08)';
-    chip.style.borderColor='rgba(201,153,58,0.4)';
-    chip.style.color='#C9993A';
-    chip.style.fontWeight='700';
+  const key=btn.dataset.amenity;
+  if(activeAmenities.has(key)){
+    activeAmenities.delete(key);
+    btn.style.background='rgba(201,153,58,0.08)';
+    btn.style.borderColor='rgba(201,153,58,0.4)';
+    btn.style.color='#C9993A';
+    btn.style.fontWeight='700';
   } else {
-    activeAmenity=btn.dataset.amenity;
-    chip.style.background='#C9993A';
-    chip.style.borderColor='#C9993A';
-    chip.style.color='#fff';
+    activeAmenities.add(key);
+    btn.style.background='#C9993A';
+    btn.style.borderColor='#C9993A';
+    btn.style.color='#fff';
   }
   renderHotels();
 }
@@ -1950,9 +2227,8 @@ function setCountry(btn){
 function filterAndShow(country){
   showPage('hotels');
   activeCountry=country;
-  activeAmenity=null;
-  const chip=document.getElementById('chip-waterpark');
-  if(chip){chip.style.background='rgba(201,153,58,0.08)';chip.style.borderColor='rgba(201,153,58,0.4)';chip.style.color='#C9993A';}
+  activeAmenities.clear();
+  document.querySelectorAll('.amenity-chip').forEach(c=>{c.style.background='rgba(201,153,58,0.08)';c.style.borderColor='rgba(201,153,58,0.4)';c.style.color='#C9993A';});
   const si=document.getElementById('search-input');
   if(si) si.value='';
   document.querySelectorAll('.filter-chip').forEach(b=>{b.classList.toggle('active',b.dataset.country===country);});
@@ -2052,13 +2328,18 @@ function renderSavedHotelsPage(){
     </div>`).join('')}</div>`;
 }
 
+const AMENITY_FIELD_MAP={waterpark:'wp',allinc:'allinc',lazyriver:'lazy',teensclub:'teens',privatebeach:'beach'};
 function renderHotels(){
   const q=(document.getElementById('search-input')?.value||'').toLowerCase().trim();
   let filtered=H.filter(h=>{
     const hDisplay=getDisplayCountry(h.c);
     const mc=activeCountry==='All'||hDisplay===activeCountry||h.c===activeCountry;
     const ms=!q||h.n.toLowerCase().includes(q)||h.city.toLowerCase().includes(q)||h.c.toLowerCase().includes(q)||(h.kc&&h.kc.toLowerCase().includes(q));
-    const mam=!activeAmenity||(activeAmenity==='waterpark'&&(()=>{const am=getAmenities(h.n);return am.wp&&am.wp.startsWith('Yes');})());
+    const am=getAmenities(h.n);
+    const mam=[...activeAmenities].every(key=>{
+      const field=AMENITY_FIELD_MAP[key];
+      return field&&am[field]&&am[field].toLowerCase().startsWith('yes');
+    });
     return mc&&ms&&mam;
   });
   const grouped={};
