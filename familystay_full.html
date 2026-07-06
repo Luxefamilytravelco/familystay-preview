@@ -2407,10 +2407,27 @@ function fsSetUser(name){
   if(el) el.textContent = first;
   if(av) av.textContent = initial;
 }
+function fsTrack(event_type, extra){
+  try{
+    fetch('/api/track', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(Object.assign({event_type}, extra||{}))
+    }).catch(()=>{});
+  }catch(e){}
+}
 function fsSignup(){
   const input = document.getElementById('signup-firstname');
-  const name = input ? input.value.trim() : '';
-  fsSetUser(name || 'Jane');
+  const lastInput = document.getElementById('signup-lastname');
+  const emailInput = document.getElementById('trial-email');
+  const firstName = input ? input.value.trim() : '';
+  const lastName = lastInput ? lastInput.value.trim() : '';
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
+  const email = emailInput ? emailInput.value.trim() : '';
+  fsSetUser(firstName || 'Jane');
+  if(email){
+    fsTrack('signup', {email, name: fullName, source:'email_form'});
+  }
   showPage('trial-dashboard');
 }
 function showPage(id, fromHistory){
@@ -2847,7 +2864,7 @@ renderHotels();</script>
           </div>
           <div class="tr-form-group">
             <label class="tr-label">Last name</label>
-            <input type="text" class="tr-input" placeholder="Smith"/>
+            <input type="text" class="tr-input" id="signup-lastname" placeholder="Smith"/>
           </div>
         </div>
         <div class="tr-form-group">
