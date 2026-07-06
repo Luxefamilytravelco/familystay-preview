@@ -962,7 +962,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
 
   <footer>
     <svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
-    <div class="footer-links"><a onclick="showPage('about')" style="color:var(--sage);text-decoration:none;cursor:pointer">About</a><a onclick="showPage('privacy')" style="color:var(--sage);text-decoration:none;cursor:pointer">Privacy</a><a onclick="showPage('terms')" style="color:var(--sage);text-decoration:none;cursor:pointer">Terms</a><a style="color:var(--sage);text-decoration:none">Contact</a><a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:5px"><i class="ti ti-brand-instagram" style="font-size:14px"></i>@familystaycollection</a></div>
+    <div class="footer-links"><a onclick="showPage('about')" style="color:var(--sage);text-decoration:none;cursor:pointer">About</a><a onclick="showPage('privacy')" style="color:var(--sage);text-decoration:none;cursor:pointer">Privacy</a><a onclick="showPage('terms')" style="color:var(--sage);text-decoration:none;cursor:pointer">Terms</a><a href="mailto:hello@familystaycollection.com" style="color:var(--sage);text-decoration:none">Contact</a><a href="https://instagram.com/familystaycollection" target="_blank" style="color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:5px"><i class="ti ti-brand-instagram" style="font-size:14px"></i>@familystaycollection</a></div>
     <div class="footer-note">© 2026 FamilyStay Collection™ · Luxury family travel, curated.</div>
   </footer>
 </div>
@@ -2132,7 +2132,7 @@ function fsSignup(){
   fsSetUser(name || 'Jane');
   showPage('trial-dashboard');
 }
-function showPage(id){
+function showPage(id, fromHistory){
   document.querySelectorAll('.fs-page').forEach(p=>p.classList.remove('active'));
   const page=document.getElementById('page-'+id);
   if(page){page.classList.add('active');window.scrollTo(0,0);}
@@ -2144,7 +2144,24 @@ function showPage(id){
   if(id==='saved-hotels')renderSavedHotelsPage();
   if(id==='trial-dashboard')refreshSavedDashboardCard();
   // Member dashboard — no trial state (membership is free)
+
+  // Push a real history entry so browser Back/Forward move between in-app pages
+  // instead of leaving the site. Skip pushing when we're responding to Back/Forward itself.
+  if(!fromHistory){
+    history.pushState({page:id}, '', '#'+id);
+  }
 }
+
+// Handle browser Back/Forward: read which page it should land on and show it
+// without pushing a new entry (that would break the history chain).
+window.addEventListener('popstate', function(e){
+  const id = (e.state && e.state.page) ? e.state.page : 'home';
+  showPage(id, true);
+});
+
+// Give the very first page load a real history entry to land on,
+// so the first Back press has somewhere in-app to go rather than leaving immediately.
+history.replaceState({page:'home'}, '', '#home');
 
 /* ============ HERO SLIDESHOW ============ */
 const heroBgs = [
