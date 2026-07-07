@@ -1415,7 +1415,12 @@ const AMENITIES = {
   "Shangri-La Rasa Sentosa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes – Cool Zone pool",teens:"No",beach:"Yes – Sentosa",allinc:"No",notes:"Sentosa beach access; cable car nearby"},
   "Village Hotel Sentosa":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"Yes – Sentosa",allinc:"No",notes:""},
   "Capella Singapore":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes – certified",famsuite:"Yes – family villas",kidspool:"Yes",teens:"No",beach:"Yes – Sentosa",allinc:"No",notes:"Heritage colonial buildings; butler service"},
-  "Hilton Singapore Orchard":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Orchard Rd",allinc:"No",notes:""}
+  "Hilton Singapore Orchard":{wp:"No",lazy:"No",splash:"Yes",babysit:"Yes",famsuite:"Yes – family rooms",kidspool:"Yes",teens:"No",beach:"No – Orchard Rd",allinc:"No",notes:""},
+  "Avista Hideaway Phuket Patong – MGallery":{wp:"No",lazy:"No",splash:"Yes – 3 saltwater pools with kids area",babysit:"Yes – available on request",famsuite:"Yes – family rooms from 55sqm",kidspool:"Yes – kids pool",teens:"No",beach:"No – beach shuttle provided",allinc:"No",notes:"Supervised kids club with daily activities; games room with PlayStation & table tennis; rooftop mini-golf; Michelin-guide Tambu restaurant"},
+  "Grande Centre Point Space Pattaya":{wp:"Yes – ~12,000 sqm water park with 4 themed zones",lazy:"Yes – lazy river",splash:"Yes – multiple zones",babysit:"No",famsuite:"Yes – family rooms",kidspool:"Yes – kids pool",teens:"No",beach:"No – 1.6km to Pattaya Beach",allinc:"No",notes:"Space-themed Astro Club kids club; 4-zone water park; Thailand's first sea-view onsen; sky pool; two-story all-ages arcade"},
+  "Da Nang Mikazuki Japanese Resorts & Spa":{wp:"Yes – 2 waterparks incl. indoor Water Park 365",lazy:"Yes – lazy river",splash:"Yes – pirate island slides",babysit:"Yes – available on request",famsuite:"Yes – family suites with outdoor hot spring balcony",kidspool:"Yes – children's pool",teens:"No",beach:"Yes – private beachfront on Da Nang Bay",allinc:"No",notes:"Japanese-themed resort on 13 hectares; indoor waterpark for rainy days; family onsen; rooftop infinity pool; carp feeding & horse activities"},
+  "Grand Mercure Phuket Patong":{wp:"No",lazy:"No",splash:"Yes – kids pool with waterslide",babysit:"Yes – available on request",famsuite:"Yes – 1 & 2 bedroom pool villas",kidspool:"Yes – kids pool with slide",teens:"No",beach:"No – 300m walk to Patong Beach",allinc:"No",notes:"Kids Corner ages 4–12: clay painting, batik, cupcake decoration & games; 3 lagoon pools; complimentary beach & shopping shuttle"},
+  "Solea Palm Resort Mactan":{wp:"Yes – complimentary water park access",lazy:"No",splash:"Yes – multiple pool slides",babysit:"No",famsuite:"Yes – family rooms & private pool villas",kidspool:"Yes – kids pool",teens:"No",beach:"Yes – private beach with free cabanas",allinc:"No",notes:"7 outdoor pools; beachfront Cebu; archery; kids zone activities; 10 mins from Mactan airport"},
 };
 
 // Default amenity for any hotel not in the lookup
@@ -1950,7 +1955,12 @@ const H=[
   {n:"Mandarin Oriental Bosphorus Istanbul",c:"Turkey",city:"Istanbul",kc:"Kids Club",h:"Daily",a:""},
   {n:"Maxx Royal Belek Golf Resort",c:"Turkey",city:"Belek",kc:"Kids Kingdom",h:"Daily",a:""},
   {n:"Gloria Serenity Resort",c:"Turkey",city:"Belek",kc:"Kids Club",h:"Daily",a:""},
-  {n:"Rixos Premium Belek",c:"Turkey",city:"Belek",kc:"Rixy Kids Club",h:"Daily",a:"All ages"}
+  {n:"Rixos Premium Belek",c:"Turkey",city:"Belek",kc:"Rixy Kids Club",h:"Daily",a:"All ages"},
+  {n:"Avista Hideaway Phuket Patong – MGallery",c:"Thailand",city:"Phuket",kc:"Kids Club",h:"Daily",a:"All ages"},
+  {n:"Grande Centre Point Space Pattaya",c:"Thailand",city:"Pattaya",kc:"Astro Club",h:"8am–6pm",a:"All ages"},
+  {n:"Da Nang Mikazuki Japanese Resorts & Spa",c:"Vietnam",city:"Da Nang",kc:"Kids Club",h:"Daily",a:"All ages"},
+  {n:"Grand Mercure Phuket Patong",c:"Thailand",city:"Phuket",kc:"Kids Corner",h:"Daily",a:"4–12 yrs"},
+  {n:"Solea Palm Resort Mactan",c:"Philippines",city:"Cebu",kc:"Kids Zone",h:"Daily",a:"All ages"},
 ];
 
 let activeCountry="All";
@@ -2255,6 +2265,7 @@ function toggleSaveHotel(name, event){
   const nowSaved=!saved.includes(name);
   saved = nowSaved ? [...saved, name] : saved.filter(n=>n!==name);
   setSavedHotelNames(saved);
+  fsTrack('save_hotel', {payload: {hotel_name: name, action: nowSaved ? 'saved' : 'unsaved'}});
 
   // Update any matching grid card heart(s) without a full re-render
   document.querySelectorAll('.hcard-save-btn[data-hotel="'+CSS.escape(name)+'"]').forEach(btn=>{
