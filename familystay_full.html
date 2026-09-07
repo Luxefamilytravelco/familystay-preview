@@ -753,8 +753,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
     <a onclick="showPage('about')">About</a>
   </div>
   <div class="nav-right-desktop" style="display:flex;align-items:center;gap:8px">
-    <button class="nav-login-btn" onclick="showPage('login')">Log in</button>
-    <button class="nav-btn" onclick="showPage('trial-signup')">Join free</button>
+    <a href="https://instagram.com/familystaycollection" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;color:var(--navy);text-decoration:none;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;border:1px solid var(--border);transition:border-color 0.2s,color 0.2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'"><i class="ti ti-brand-instagram" style="font-size:15px"></i> Follow us</a>
   </div>
   <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -764,10 +763,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
   <a class="nav-mobile-link" onclick="showPage('home');closeMobileNav()">Home</a>
   <a class="nav-mobile-link" onclick="showPage('hotels');closeMobileNav()">Hotels</a>
   <a class="nav-mobile-link" onclick="showPage('about');closeMobileNav()">About</a>
-  <div class="nav-mobile-btns">
-    <button class="nav-login-btn" style="flex:1" onclick="showPage('login');closeMobileNav()">Log in</button>
-    <button class="nav-btn" style="flex:1" onclick="showPage('trial-signup');closeMobileNav()">Join free</button>
-  </div>
+  <a href="https://instagram.com/familystaycollection" target="_blank" rel="noopener" class="nav-mobile-link" style="display:flex;align-items:center;gap:6px"><i class="ti ti-brand-instagram" style="font-size:15px"></i> Follow @familystaycollection</a>
 </div>
 
 <!-- HOME -->
@@ -913,8 +909,8 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
       <div style="max-width:340px">
         <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;font-style:italic;color:var(--cream);line-height:1.5;margin-bottom:16px">"We built this because we couldn't find a site that told us what we actually needed to know before booking a family holiday."</div>
         <div style="font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)">— Founder, FamilyStay Collection</div>
-        <button onclick="showPage('trial-signup')" style="margin-top:20px;background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:12px 22px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px">
-          <i class="ti ti-users"></i> Plan smarter, together
+        <button onclick="showPage('hotels')" style="margin-top:20px;background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:12px 22px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px">
+          <i class="ti ti-search"></i> Browse hotels
         </button>
       </div>
     </div>
@@ -953,10 +949,10 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
 
     <div class="premium-banner" style="background:linear-gradient(135deg,#1a2f1a 0%,#1C2B1E 100%);margin-top:16px">
       <div>
-        <div class="premium-title">Save hotels. Get alerts. Plan smarter.</div>
-        <div class="premium-sub">Free membership — save your shortlist, get new arrivals in your favourite destinations.</div>
+        <div class="premium-title">New hotels, deals & family travel tips.</div>
+        <div class="premium-sub">Follow along on Instagram for new destinations, verified amenity finds and real family travel stories.</div>
       </div>
-      <button class="premium-btn" onclick="showPage('trial-signup')">Join free — no card needed</button>
+      <a href="https://instagram.com/familystaycollection" target="_blank" rel="noopener" class="premium-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px"><i class="ti ti-brand-instagram"></i> Follow us</a>
     </div>
   </div>
 
@@ -1060,7 +1056,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
     <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
       <svg class="fs-logo" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
     </div>
-    <button class="nav-btn" onclick="showPage('trial-dashboard')"><i class="ti ti-arrow-left" style="font-size:13px"></i> Back to dashboard</button>
+    <button class="nav-btn" onclick="showPage('home')"><i class="ti ti-arrow-left" style="font-size:13px"></i> Back home</button>
   </nav>
   <div class="section" style="padding-top:40px;max-width:1200px;margin:0 auto;width:100%">
     <div class="section-header" style="margin-bottom:24px">
@@ -1072,7 +1068,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
   </div>
   <footer style="margin-top:40px">
     <svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
-    <div class="footer-note">© 2026 FamilyStay Collection™ · Luxury family travel, curated.</div>
+    <div class="footer-note">© 2026 FamilyStay Collection™ · Luxury family travel, curated. · <a href="https://instagram.com/familystaycollection" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
   </footer>
 </div>
 
@@ -1099,7 +1095,7 @@ footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg)
   </div>
   <footer style="padding:20px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#A0AACC;flex-wrap:wrap;gap:10px">
     <svg class="fs-logo-ft" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
-    <div>© 2026 FamilyStay Collection™ · Luxury family travel, curated.</div>
+    <div>© 2026 FamilyStay Collection™ · Luxury family travel, curated. · <a href="https://instagram.com/familystaycollection" target="_blank" rel="noopener" style="color:#C9993A;text-decoration:none"><i class="ti ti-brand-instagram"></i> @familystaycollection</a></div>
   </footer>
 </div>
 
@@ -2602,9 +2598,9 @@ renderHotels();</script>
       <button onclick="showPage('hotels')" style="background:var(--navy);color:var(--cream);border:none;border-radius:10px;padding:14px 28px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px">
         <i class="ti ti-search"></i> Browse all hotels
       </button>
-      <button onclick="showPage('trial-signup')" style="background:transparent;color:var(--navy);border:2px solid var(--navy);border-radius:10px;padding:14px 28px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer">
-        Join free
-      </button>
+      <a href="https://instagram.com/familystaycollection" target="_blank" rel="noopener" style="background:transparent;color:var(--navy);border:2px solid var(--navy);border-radius:10px;padding:14px 28px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:8px">
+        <i class="ti ti-brand-instagram"></i> Follow us
+      </a>
     </div>
 
   </div>
@@ -3048,8 +3044,8 @@ renderHotels();</script>
       <svg class="fs-logo" viewBox="0 0 206 74" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FamilyStay Collection"><text x="4" y="46" font-family="'Cormorant Garamond',serif" font-weight="700" font-size="44" letter-spacing="0.5" fill="#1A2744">Family<tspan fill="#C9993A">Stay</tspan></text><text x="6" y="71" font-family="Nunito,sans-serif" font-weight="800" font-size="13" fill="#C9993A" textLength="190" lengthAdjust="spacing">COLLECTION</text></svg>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
-      <button class="c-nav-back-btn" onclick="showPage('trial-dashboard')"><i class="ti ti-arrow-left" style="font-size:13px"></i> Back to dashboard</button>
-      <button class="nav-btn" onclick="showPage('trial-dashboard')">My account</button>
+      <button class="c-nav-back-btn" onclick="showPage('home')"><i class="ti ti-arrow-left" style="font-size:13px"></i> Back home</button>
+      <button class="nav-btn" onclick="showPage('saved-hotels')">Saved hotels</button>
     </div>
   </nav>
   <div class="concierge-hero">
