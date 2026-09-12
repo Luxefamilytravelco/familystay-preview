@@ -2057,7 +2057,7 @@ function openProfile(name,city,country,kc,hours,ages,allInc,state){
 function hpTab(el,id){
   document.querySelectorAll('.hp-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  ['overview','kidsclub','amenities','reviews'].forEach(t=>{
+  ['overview','kidsclub','amenities'].forEach(t=>{
     document.getElementById('hp-tab-'+t).style.display=t===id?'block':'none';
   });
 }
@@ -2160,21 +2160,24 @@ function computeBookingUrls(q){
   // After Expedia affiliate approval, swap these for direct hotel ID deep-links.
   const hotelQ=encodeURIComponent(q);
 
+  const PPID='1110l36456'; // EPS Publisher Partner ID
   const urls={
-    // &selected=true pre-selects first result on Expedia/Hotels.com (closest to direct hotel page without an ID)
-    expedia:'https://www.expedia.com/Hotel-Search?destination='+hotelQ+'&selected=true'
+    expedia:'https://www.expedia.com/Hotel-Search?destination='+hotelQ
       +(cinMDY?'&startDate='+cinMDY+'&endDate='+coutMDY:'')
       +'&adults='+adults
-      +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):''),
-    hotels:'https://www.hotels.com/Hotel-Search?destination='+hotelQ+'&selected=true'
+      +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):'')
+      +'&affcid=US.DIRECT.EXPSG.'+PPID+'.01',
+    hotels:'https://www.hotels.com/Hotel-Search?destination='+hotelQ
       +(cinMDY?'&startDate='+cinMDY+'&endDate='+coutMDY:'')
       +'&adults='+adults
-      +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):''),
+      +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):'')
+      +'&affcid=US.DIRECT.EXPSG.'+PPID+'.01',
     // Vrbo: uses destination search — closest option without property ID
     vrbo:'https://www.vrbo.com/search?destination='+hotelQ
       +(cin?'&startDate='+cin+'&endDate='+cout:'')
       +'&adults='+adults
       +(children?'&children='+children:'')
+      +'&affcid=US.DIRECT.EXPSG.'+PPID+'.01'
   };
 
   const dateLabel=cin?`${cinLabel} → ${coutLabel}`:'';
@@ -2199,7 +2202,7 @@ function renderBookingOptions(q){
     {label:'H.',bg:'#D32F2F',name:'Hotels.com',desc:'Earn free nights · dates & guests passed',url:urls.hotels},
   ];
 
-  const disclosure=`<div style="font-size:11px;color:#A0AACC;line-height:1.6;margin-top:14px;font-family:'DM Sans',sans-serif">FamilyStay Collection™ is building affiliate partnerships with these platforms. Once live, we may earn a commission when you book, at no extra cost to you. This helps keep the site free.</div>`;
+  const disclosure=`<div style="font-size:11px;color:#A0AACC;line-height:1.6;margin-top:14px;font-family:'DM Sans',sans-serif">FamilyStay Collection™ earns a small commission when you book through these links, at no extra cost to you. This keeps the site free and the curation independent.</div>`;
 
   return dateNote+`<div class="hp-booking-opts">${sites.map(s=>`
     <a class="hp-book-row" href="${s.url}" target="_blank" rel="noopener sponsored">
@@ -2453,7 +2456,7 @@ function showPage(id, fromHistory){
   // Push a real history entry so browser Back/Forward move between in-app pages
   // instead of leaving the site. Skip pushing when we're responding to Back/Forward itself.
   if(!fromHistory){
-    history.pushState({page:id}, '', '#'+id);
+    try{ history.pushState({page:id}, '', '#'+id); }catch(e){}
   }
 }
 
@@ -2466,7 +2469,7 @@ window.addEventListener('popstate', function(e){
 
 // Give the very first page load a real history entry to land on,
 // so the first Back press has somewhere in-app to go rather than leaving immediately.
-history.replaceState({page:'home'}, '', '#home');
+try{ history.replaceState({page:'home'}, '', '#home'); }catch(e){}
 
 /* ============ HERO SLIDESHOW ============ */
 const heroBgs = [
@@ -2641,7 +2644,7 @@ renderHotels();</script>
 
       <div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px">4. Affiliate links</h2>
-        <p>FamilyStay Collection™ is built as an affiliate business. We are in the process of establishing affiliate partnerships with platforms including Expedia, Vrbo and Hotels.com. Once live, booking through our links may earn us a small commission at no additional cost to you. This does not and will not influence which hotels are featured in our collection.</p>
+        <p>FamilyStay Collection™ is built as an affiliate business. We have established affiliate partnerships with platforms including Expedia, Hotels.com and Vrbo. Booking through our links may earn us a small commission at no additional cost to you. This does not and will not influence which hotels are featured in our collection.</p>
       </div>
 
       <div>
@@ -2711,7 +2714,7 @@ renderHotels();</script>
 
       <div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px">4. Affiliate relationships</h2>
-        <p>FamilyStay Collection™ is built as an affiliate business and is in the process of establishing affiliate partnerships. Once live, we may earn a commission when you book through links on our site, at no additional cost to you. This does not and will not influence our editorial decisions. Hotels are selected solely on the basis of suitability for families.</p>
+        <p>FamilyStay Collection™ is built as an affiliate business. We earn a commission when you book through links on our site, at no additional cost to you. This does not and will not influence our editorial decisions. Hotels are selected solely on the basis of suitability for families.</p>
       </div>
 
       <div>
