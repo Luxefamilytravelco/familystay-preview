@@ -2160,24 +2160,27 @@ function computeBookingUrls(q){
   // After Expedia affiliate approval, swap these for direct hotel ID deep-links.
   const hotelQ=encodeURIComponent(q);
 
-  const PPID='1110l36456'; // EPS Publisher Partner ID
+  const CAMREF='1011l5Noyf';       // EPS Travel Creator camref
+  const CREATIVEREF='1011l66481';  // EPS creativeref
+
+  // Build inner search URLs (dates & guests embedded)
+  const expediaInner='https://www.expedia.com/Hotel-Search?destination='+hotelQ
+    +(cinMDY?'&startDate='+cinMDY+'&endDate='+coutMDY:'')
+    +'&adults='+adults
+    +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):'');
+  const hotelsInner='https://www.hotels.com/Hotel-Search?destination='+hotelQ
+    +(cinMDY?'&startDate='+cinMDY+'&endDate='+coutMDY:'')
+    +'&adults='+adults
+    +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):'');
+  const vrboInner='https://www.vrbo.com/search?destination='+hotelQ
+    +(cin?'&startDate='+cin+'&endDate='+cout:'')
+    +'&adults='+adults
+    +(children?'&children='+children:'');
+
   const urls={
-    expedia:'https://www.expedia.com/Hotel-Search?destination='+hotelQ
-      +(cinMDY?'&startDate='+cinMDY+'&endDate='+coutMDY:'')
-      +'&adults='+adults
-      +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):'')
-      +'&affcid=US.DIRECT.EXPSG.'+PPID+'.01',
-    hotels:'https://www.hotels.com/Hotel-Search?destination='+hotelQ
-      +(cinMDY?'&startDate='+cinMDY+'&endDate='+coutMDY:'')
-      +'&adults='+adults
-      +(children?'&children='+kidAges.map(a=>Math.min(a,17)).join('_'):'')
-      +'&affcid=US.DIRECT.EXPSG.'+PPID+'.01',
-    // Vrbo: uses destination search — closest option without property ID
-    vrbo:'https://www.vrbo.com/search?destination='+hotelQ
-      +(cin?'&startDate='+cin+'&endDate='+cout:'')
-      +'&adults='+adults
-      +(children?'&children='+children:'')
-      +'&affcid=US.DIRECT.EXPSG.'+PPID+'.01'
+    expedia:'https://www.expedia.com/affiliate?landingPage='+encodeURIComponent(expediaInner)+'&camref='+CAMREF+'&creativeref='+CREATIVEREF,
+    hotels:'https://www.hotels.com/affiliate?landingPage='+encodeURIComponent(hotelsInner)+'&camref='+CAMREF+'&creativeref='+CREATIVEREF,
+    vrbo:'https://www.vrbo.com/affiliate?landingPage='+encodeURIComponent(vrboInner)+'&camref='+CAMREF+'&creativeref='+CREATIVEREF
   };
 
   const dateLabel=cin?`${cinLabel} → ${coutLabel}`:'';
